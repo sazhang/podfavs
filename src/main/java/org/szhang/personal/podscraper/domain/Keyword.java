@@ -1,4 +1,4 @@
-package podcast;
+package org.szhang.personal.podscraper.domain;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -8,14 +8,11 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.List;
 
 /**
- * Keyword associated with the podcast.
+ * Keyword associated with the podcasts.
  */
 @NodeEntity
-public class Keyword {
+public class Keyword extends Entity {
 
-  @Id
-  @GeneratedValue
-  private Long id;
   private String word;
 
   @Relationship(type = "TAGGED_AS", direction = Relationship.INCOMING)
@@ -35,9 +32,9 @@ public class Keyword {
   }
 
   /**
-   * Add a podcast to this keyword.
+   * Add a podcasts to this keyword.
    *
-   * @param podcast   podcast
+   * @param podcast   podcasts
    */
   public void addPodcast(Podcast podcast) {
     this.podcasts.add(podcast);

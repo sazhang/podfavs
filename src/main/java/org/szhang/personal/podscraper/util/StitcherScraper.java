@@ -1,14 +1,17 @@
-package scaper;
+package org.szhang.personal.podscraper.util;
 
+import org.neo4j.ogm.config.Configuration;
+import org.neo4j.ogm.session.Session;
+import org.neo4j.ogm.session.SessionFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import podcast.Category;
-import podcast.Keyword;
-import podcast.Podcast;
+import org.szhang.personal.podscraper.domain.Category;
+import org.szhang.personal.podscraper.domain.Keyword;
+import org.szhang.personal.podscraper.domain.Podcast;
 
 import java.io.File;
 import java.util.*;
@@ -43,6 +46,9 @@ public class StitcherScraper {
    * @return map of podcast names, podcast objects
    */
   public Map<String, Podcast> runScraper() {
+    Configuration conf = new Configuration.Builder().build();
+    SessionFactory factory = new SessionFactory(conf, "com.baeldung.graph");
+    Session session = factory.openSession();
     getPodcastsByCategory();
     getEachPodcastDetails();
     return allPodcasts;
@@ -124,7 +130,7 @@ public class StitcherScraper {
           continue; // skip podcast w/out keywords and/or description
         }
 
-        Podcast aPodcast = new Podcast(title, description, rating, podcastUrl, image, keywordList);
+        Podcast aPodcast = new Podcast(title, entry.getKey(), description, rating, podcastUrl, image, keywordList);
         allPodcasts.put(title, aPodcast);
       }
     }

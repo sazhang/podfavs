@@ -1,4 +1,4 @@
-package podcast;
+package org.szhang.personal.podscraper.domain;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -9,14 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Host of the podcast.
+ * Host of the podcasts.
  */
 @NodeEntity
-public class Host {
+public class Host extends Entity {
 
-  @Id
-  @GeneratedValue
-  private Long id;
   private String name;
 
   @Relationship(type = "HOSTS")
@@ -37,9 +34,9 @@ public class Host {
   }
 
   /**
-   * Add a podcast to this host's list of podcasts.
+   * Add a podcasts to this host's list of podcasts.
    *
-   * @param podcast   podcast
+   * @param podcast   podcasts
    */
   public void addPodcast(Podcast podcast) {
     this.podcasts.add(podcast);

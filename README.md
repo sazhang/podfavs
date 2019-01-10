@@ -1,2 +1,2 @@
 # podscraper
-Scrapes information about podcasts from Stitcher's List.
+Scrapes information about podcasts from Stitcher List.

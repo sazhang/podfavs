@@ -1,4 +1,4 @@
-package podcast;
+package org.szhang.personal.podscraper.domain;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -9,14 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Information about a podcast.
+ * Information about a podcasts.domain.
  */
 @NodeEntity
-public class Podcast {
+public class Podcast extends Entity {
 
-  @Id
-  @GeneratedValue
-  private Long id;
   private String name;
   private String description;
   private double rating;
@@ -33,16 +30,17 @@ public class Podcast {
   private List<Host> hosts; //TODO: stitcher does not provide these
 
   /**
-   * Construct a new podcast with the given characteristics.
+   * Construct a new podcasts with the given characteristics.
    *
-   * @param name          podcast name
-   * @param descrip       podcast descrip
+   * @param name          podcasts name
+   * @param category      category this podcast falls under
+   * @param descrip       podcasts descrip
    * @param rating        rating
-   * @param url           link to stitcher profile of the podcast
-   * @param imageUrl      link to podcast image
+   * @param url           link to stitcher profile of the podcasts
+   * @param imageUrl      link to podcasts image
    * @param keywords      stitcher given keywords
    */
-  public Podcast(String name, String descrip, double rating, String url, String imageUrl,
+  public Podcast(String name, Category category, String descrip, double rating, String url, String imageUrl,
                  List<Keyword> keywords) {
     this.name = name;
     this.description = descrip;
@@ -50,6 +48,7 @@ public class Podcast {
     this.url = url;
     this.imageUrl = imageUrl;
     this.categories = new ArrayList<>();
+    this.categories.add(category);
     this.keywords = keywords;
   }
 
@@ -58,7 +57,7 @@ public class Podcast {
   }
 
   /**
-   * Add a category to this podcast.
+   * Add a category to this podcasts.
    *
    * @param category   category
    */
@@ -67,7 +66,7 @@ public class Podcast {
   }
 
   /**
-   * Add a keyword to this podcast.
+   * Add a keyword to this podcasts.
    *
    * @param keyword   keyword
    */
@@ -76,7 +75,7 @@ public class Podcast {
   }
 
   /**
-   * Add a host to this podcast.
+   * Add a host to this podcasts.
    *
    * @param host   host
    */
@@ -85,7 +84,7 @@ public class Podcast {
   }
 
   /**
-   * Getters & setters for podcast characteristics.
+   * Getters & setters for podcasts characteristics.
    */
   public String getName() {
     return name;

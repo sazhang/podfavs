@@ -1,6 +1,5 @@
-package podcast;
+package org.szhang.personal.podscraper.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -9,14 +8,11 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.List;
 
 /**
- * Category describes the topic focus of a podcast.
+ * Category describes the topic focus of the podcast.
  */
 @NodeEntity
-public class Category {
+public class Category extends Entity {
 
-  @Id
-  @GeneratedValue
-  private Long id;
   private String category;
 
   @Relationship(type = "IN_CATEGORY", direction = Relationship.INCOMING)
