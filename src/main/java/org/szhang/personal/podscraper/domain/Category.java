@@ -1,7 +1,5 @@
 package org.szhang.personal.podscraper.domain;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -15,7 +13,7 @@ public class Category extends Entity {
 
   private String category;
 
-  @Relationship(type = "IN_CATEGORY", direction = Relationship.INCOMING)
+  @Relationship(type = "BELONGS_TO", direction = Relationship.INCOMING)
   private List<Podcast> podcasts;
 
   /**
@@ -31,20 +29,28 @@ public class Category extends Entity {
     // empty constructor required by neo4j api
   }
 
-  /**
+  /*
    * Add a podcast to this category.
    *
    * @param podcast   podcast
    */
-  public void addPodcast(Podcast podcast) {
+  /*public void addPodcast(Podcast podcast) {
     this.podcasts.add(podcast);
-  }
+  }*/
 
   public String getCategory() {
     return category;
   }
 
+  public void setCategory(String category) {
+    this.category = category;
+  }
+
   public List<Podcast> getPodcasts() {
     return podcasts;
+  }
+
+  public void setPodcasts(List<Podcast> podcasts) {
+    this.podcasts = podcasts;
   }
 }
