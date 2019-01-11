@@ -29,14 +29,14 @@ public class Category extends Entity {
     // empty constructor required by neo4j api
   }
 
-  /*
+  /**
    * Add a podcast to this category.
    *
    * @param podcast   podcast
    */
-  /*public void addPodcast(Podcast podcast) {
+  public void addPodcast(Podcast podcast) {
     this.podcasts.add(podcast);
-  }*/
+  }
 
   public String getCategory() {
     return category;

@@ -1,7 +1,5 @@
 package org.szhang.personal.podscraper.domain;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -26,8 +24,8 @@ public class Podcast extends Entity {
   @Relationship(type = "TAGGED_AS")
   private List<Keyword> keywords;
 
-  /*@Relationship(type = "HOSTS", direction = Relationship.INCOMING)
-  private List<Host> hosts; //TODO: stitcher does not provide these*/
+  @Relationship(type = "HOSTS", direction = Relationship.INCOMING)
+  private List<Host> hosts; //TODO: stitcher does not provide these
 
   /**
    * Construct a new podcasts with the given characteristics.
@@ -61,9 +59,9 @@ public class Podcast extends Entity {
    *
    * @param category   category
    */
-  /*public void addACategory(Category category) {
+  public void addACategory(Category category) {
     this.categories.add(category);
-  }*/
+  }
 
   /**
    * Add a keyword to this podcasts.
@@ -79,9 +77,9 @@ public class Podcast extends Entity {
    *
    * @param host   host
    */
- /* public void addAHost(Host host) {
+  public void addAHost(Host host) {
     this.hosts.add(host);
-  }*/
+  }
 
   /**
    * Getters & setters for podcasts characteristics.
@@ -142,11 +140,11 @@ public class Podcast extends Entity {
     this.keywords = keywords;
   }
 
-  /*public List<Host> getHosts() {
+  public List<Host> getHosts() {
     return hosts;
   }
 
   public void setHosts(List<Host> hosts) {
     this.hosts = hosts;
-  }*/
+  }
 }

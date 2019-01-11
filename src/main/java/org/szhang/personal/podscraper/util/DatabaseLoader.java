@@ -1,4 +1,4 @@
-package org.szhang.personal.podscraper;
+package org.szhang.personal.podscraper.util;
 
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
@@ -12,21 +12,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.szhang.personal.podscraper.domain.Category;
 import org.szhang.personal.podscraper.domain.Keyword;
 import org.szhang.personal.podscraper.domain.Podcast;
-import org.szhang.personal.podscraper.util.StitcherScraper;
 
 import java.io.File;
 import java.util.*;
 
 /**
- * Scrape Sticher Lists of podcasts.
+ * Scrape Sticher Lists of podcasts and load the data into neo4j.
  */
 @Component
-public class ImportServiceImpl implements CommandLineRunner {
+public class DatabaseLoader implements CommandLineRunner {
 
   private Map<String, Keyword> keywords;
   private Map<String, List<String>> podcastsByCategory;
@@ -39,42 +36,25 @@ public class ImportServiceImpl implements CommandLineRunner {
   private Transaction transaction;
 
   /**
-   * Construct a scraper.
+   * Construct a database loader.
    */
   @Autowired
-  public ImportServiceImpl(SessionFactory sessionFactory) {
+  public DatabaseLoader(SessionFactory sessionFactory) {
     this.sessionFactory = sessionFactory;
   }
 
   /**
    * Scrape Stitcher's lists to create podcast objects.
-   *
-   * @return map of podcast names, podcast objects
    */
-  //@Transactional
-  /*private void load() {
-    StitcherScraper scraper = new StitcherScraper();
-    List<Podcast> podcasts = scraper.run();
-
-    Session session = sessionFactory.openSession();
-    //  All work done in single transaction.
-    Transaction txn = session.beginTransaction();
-    for (Podcast aPodcast : podcasts) {
-      session.save(aPodcast);
-    }
-    txn.commit();
-  }*/
-
   @Override
   public void run(String... args) throws Exception {
     setUp();
     getPodcastsByCategory();
     getEachPodcastDetails();
-    //saveToDB();
   }
 
   /**
-   * Scrape Stitcher's lists to create podcast objects.
+   * Set up fields.
    */
   private void setUp() {
     keywords = new HashMap<>();
@@ -86,26 +66,14 @@ public class ImportServiceImpl implements CommandLineRunner {
     wait = new WebDriverWait(driver, 10);
 
     session = sessionFactory.openSession();
-    session.purgeDatabase(); // TODO: for testing
+    //session.purgeDatabase();
     transaction = session.beginTransaction();
   }
-
-  /*private void saveToDB() {
-    session = sessionFactory.openSession();
-    session.purgeDatabase(); // TODO: for testing
-    transaction = session.beginTransaction();
-    for (Podcast podcast : allPodcasts.values()) {
-      session.save(podcast);
-    }
-    transaction.commit();
-  }*/
 
   /**
    * Get links to all podcasts by category.
    */
   private void getPodcastsByCategory() {
-    int counter = 0; //TODO: for testing
-
     driver.get("https://www.stitcher.com/stitcher-list/all-podcasts-top-shows");
     // parse nav bar to get links to specific category lists
     List<String> categories = getUrls(driver.findElements(By.xpath("//ul[@id='category-nav']/*")));
@@ -127,10 +95,6 @@ public class ImportServiceImpl implements CommandLineRunner {
         // some categories do not have top 50 lists so just continue
         continue;
       }
-      counter++; //TODO: testing for now
-      if (counter > 5) {
-        break;
-      } 
     }
   }
 
@@ -138,12 +102,10 @@ public class ImportServiceImpl implements CommandLineRunner {
    * By category, go to each podcast profile and get the show's info.
    */
   private void getEachPodcastDetails() {
-    int counter = 0; //TODO: for testing
-
     for (Map.Entry<String, List<String>> entry : podcastsByCategory.entrySet()) {
       Category aCategory = new Category(entry.getKey());
       List<Podcast> relatedPodcasts = new ArrayList<>();
-
+      // loop through the current category's list of podcasts
       for (String podcastUrl : entry.getValue()) {
         driver.get(podcastUrl);
         String title;
@@ -152,9 +114,8 @@ public class ImportServiceImpl implements CommandLineRunner {
               By.xpath("//meta[@property='og:title']"))).getAttribute("content");
           // if we already created this podcast, then add the current category to it
           if (allPodcasts.containsKey(title)) {
-            //TODO: create method to find by title
-            /*Podcast existing = session.load
-            allPodcasts.get(title).addACategory(entry.getKey());*/
+            allPodcasts.get(title).addACategory(aCategory);
+            session.save(allPodcasts.get(title));
             continue;
           }
         } catch (Exception e) {
@@ -188,25 +149,16 @@ public class ImportServiceImpl implements CommandLineRunner {
         } catch (Exception e) {
           continue; // skip podcast w/out keywords and/or description
         }
-
         Podcast aPodcast = new Podcast(title, aCategory, description, rating, podcastUrl, image, keywordList);
-
-        relatedPodcasts.add(aPodcast);
-
+        relatedPodcasts.add(aPodcast); // need to link category w/ list of podcasts
         session.save(aPodcast);
-
-        counter++; //TODO: testing for now
-        if (counter > 5) {
-          break;
-        }
       }
-
       aCategory.setPodcasts(relatedPodcasts);
       session.save(aCategory);
     }
 
     transaction.commit();
-    //System.out.println(allPodcasts.size());
+    driver.close();
   }
 
   /**
