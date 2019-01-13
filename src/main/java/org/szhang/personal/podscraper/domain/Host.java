@@ -1,5 +1,6 @@
 package org.szhang.personal.podscraper.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -7,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Host of the podcasts.
+ * Host of the podcast.
  */
 @NodeEntity
 public class Host extends Entity {
 
   private String name;
 
+  @JsonBackReference
   @Relationship(type = "HOSTS")
   private List<Podcast> podcasts;
 
@@ -46,5 +48,13 @@ public class Host extends Entity {
 
   public List<Podcast> getPodcasts() {
     return podcasts;
+  }
+
+  @Override
+  public String toString() {
+    return "Host{" +
+        "name='" + name + '\'' +
+        ", podcasts=" + podcasts +
+        '}';
   }
 }

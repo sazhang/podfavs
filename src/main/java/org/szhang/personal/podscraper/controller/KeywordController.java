@@ -3,15 +3,19 @@ package org.szhang.personal.podscraper.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.szhang.personal.podscraper.repositories.KeywordRepository;
+import org.szhang.personal.podscraper.services.KeywordService;
 
+/**
+ * Handle user requests.
+ */
 @RestController
-@RequestMapping(value = "/api/classes")
+@RequestMapping("/suggest")
 public class KeywordController {
-  private KeywordRepository keywordRepository;
+
+  private final KeywordService keywordService;
 
   @Autowired
-  public KeywordController(KeywordRepository keywordRepository) {
-    this.keywordRepository = keywordRepository;
+  public KeywordController(KeywordService keywordService) {
+    this.keywordService = keywordService;
   }
 }

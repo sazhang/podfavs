@@ -1,4 +1,4 @@
-package org.szhang.personal.podscraper.util;
+package org.szhang.personal.podscraper.db;
 
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.szhang.personal.podscraper.domain.Category;
 import org.szhang.personal.podscraper.domain.Keyword;
@@ -23,7 +24,10 @@ import java.util.*;
  * Scrape Sticher Lists of podcasts and load the data into neo4j.
  */
 @Component
+@ConditionalOnProperty(name = "pod.db.recreate", havingValue = "true")
 public class DatabaseLoader implements CommandLineRunner {
+
+  //private final static Logger log = LoggerFactory.getLogger(Application.class);
 
   private Map<String, Keyword> keywords;
   private Map<String, List<String>> podcastsByCategory;
@@ -49,6 +53,7 @@ public class DatabaseLoader implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     setUp();
+    session = sessionFactory.openSession();
     getPodcastsByCategory();
     getEachPodcastDetails();
   }
@@ -156,7 +161,7 @@ public class DatabaseLoader implements CommandLineRunner {
       aCategory.setPodcasts(relatedPodcasts);
       session.save(aCategory);
     }
-
+    // according to docs, longer session = more efficient requests to db but memory intensive
     transaction.commit();
     driver.close();
   }

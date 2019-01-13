@@ -1,5 +1,6 @@
 package org.szhang.personal.podscraper.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -13,6 +14,7 @@ public class Category extends Entity {
 
   private String category;
 
+  @JsonManagedReference
   @Relationship(type = "BELONGS_TO", direction = Relationship.INCOMING)
   private List<Podcast> podcasts;
 
@@ -52,5 +54,13 @@ public class Category extends Entity {
 
   public void setPodcasts(List<Podcast> podcasts) {
     this.podcasts = podcasts;
+  }
+
+  @Override
+  public String toString() {
+    return "Category{" +
+        "category='" + category + '\'' +
+        ", podcasts=" + podcasts +
+        '}';
   }
 }

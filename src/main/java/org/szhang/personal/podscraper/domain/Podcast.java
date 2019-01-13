@@ -1,5 +1,7 @@
 package org.szhang.personal.podscraper.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -7,38 +9,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Information about a podcasts.domain.
+ * Information about a podcast.
  */
 @NodeEntity
 public class Podcast extends Entity {
 
   private String name;
   private String description;
-  private double rating;
+  private Double rating;
   private String url;
   private String imageUrl;
 
+  @JsonBackReference
   @Relationship(type = "BELONGS_TO")
   private List<Category> categories;
 
+  @JsonBackReference
   @Relationship(type = "TAGGED_AS")
   private List<Keyword> keywords;
 
+  @JsonManagedReference
   @Relationship(type = "HOSTS", direction = Relationship.INCOMING)
   private List<Host> hosts; //TODO: stitcher does not provide these
 
   /**
-   * Construct a new podcasts with the given characteristics.
+   * Construct a new podcast with the given characteristics.
    *
-   * @param name          podcasts name
+   * @param name          podcast name
    * @param category      category this podcast falls under
-   * @param descrip       podcasts descrip
+   * @param descrip       podcast descrip
    * @param rating        rating
-   * @param url           link to stitcher profile of the podcasts
-   * @param imageUrl      link to podcasts image
+   * @param url           link to stitcher profile of the podcast
+   * @param imageUrl      link to podcast image
    * @param keywords      stitcher given keywords
    */
-  public Podcast(String name, Category category, String descrip, double rating, String url, String imageUrl,
+  public Podcast(String name, Category category, String descrip, Double rating, String url, String imageUrl,
                  List<Keyword> keywords) {
     this.name = name;
     this.description = descrip;
@@ -47,7 +52,8 @@ public class Podcast extends Entity {
     this.imageUrl = imageUrl;
     this.categories = new ArrayList<>();
     this.categories.add(category);
-    this.keywords = keywords;
+    this.keywords = new ArrayList<>();
+    this.keywords.addAll(keywords);
   }
 
   private Podcast() {
@@ -55,7 +61,7 @@ public class Podcast extends Entity {
   }
 
   /**
-   * Add a category to this podcasts.
+   * Add a category to this podcast.
    *
    * @param category   category
    */
@@ -64,7 +70,7 @@ public class Podcast extends Entity {
   }
 
   /**
-   * Add a keyword to this podcasts.
+   * Add a keyword to this podcast.
    *
    * @param keyword   keyword
    */
@@ -73,7 +79,7 @@ public class Podcast extends Entity {
   }
 
   /**
-   * Add a host to this podcasts.
+   * Add a host to this podcast.
    *
    * @param host   host
    */
@@ -82,7 +88,7 @@ public class Podcast extends Entity {
   }
 
   /**
-   * Getters & setters for podcasts characteristics.
+   * Getters & setters for podcast characteristics.
    */
   public String getName() {
     return name;
@@ -108,11 +114,11 @@ public class Podcast extends Entity {
     this.description = description;
   }
 
-  public double getRating() {
+  public Double getRating() {
     return rating;
   }
 
-  public void setRating(double rating) {
+  public void setRating(Double rating) {
     this.rating = rating;
   }
 
@@ -146,5 +152,19 @@ public class Podcast extends Entity {
 
   public void setHosts(List<Host> hosts) {
     this.hosts = hosts;
+  }
+
+  @Override
+  public String toString() {
+    return "Podcast{" +
+        "name='" + name + '\'' +
+        ", description='" + description + '\'' +
+        ", rating=" + rating +
+        ", url='" + url + '\'' +
+        ", imageUrl='" + imageUrl + '\'' +
+        ", categories=" + categories +
+        ", keywords=" + keywords +
+        ", hosts=" + hosts +
+        '}';
   }
 }
