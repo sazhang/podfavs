@@ -1,6 +1,7 @@
 package org.szhang.personal.podscraper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.szhang.personal.podscraper.domain.Podcast;
 import org.szhang.personal.podscraper.services.PodcastService;
@@ -12,7 +13,7 @@ import java.util.List;
  * Handle user requests.
  */
 @RestController
-@RequestMapping("/suggest")
+@RequestMapping("/api")
 public class PodcastController {
 
   private final PodcastService podcastService;
@@ -23,27 +24,33 @@ public class PodcastController {
   }
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
-  public Collection<Podcast> getRecsGivenPodcastName(@RequestParam(value = "name") String name) {
+  public Page<Podcast> findSomePodcasts() {
+    return podcastService.findSomePodcasts();
+  }
+
+
+  @RequestMapping(value = "/rec/{name}", method = RequestMethod.GET)
+  public Collection<Podcast> getRecsGivenPodcastName(@PathVariable(value = "name") String name) {
     return podcastService.getRecsGivenPodcastName(name);
   }
 
-  @RequestMapping(value = "/or", method = RequestMethod.GET)
-  public Collection<Podcast> getPodcastsGivenWordsOr(@RequestParam(value = "keywords") List<String> keywords) {
+  @RequestMapping(value = "/or/{keywords}", method = RequestMethod.GET)
+  public Collection<Podcast> getPodcastsGivenWordsOr(@PathVariable(value = "keywords") List<String> keywords) {
     return podcastService.getPodcastsGivenWordsOr(keywords);
   }
 
-  @RequestMapping(value = "/and", method = RequestMethod.GET)
-  public Collection<Podcast> getPodcastsGivenWordsAnd(@RequestParam(value = "keywords") List<String> keywords) {
+  @RequestMapping(value = "/and/{keywords}", method = RequestMethod.GET)
+  public Collection<Podcast> getPodcastsGivenWordsAnd(@PathVariable(value = "keywords") List<String> keywords) {
     return podcastService.getPodcastsGivenWordsAnd(keywords);
   }
 
-  @RequestMapping(value = "/info", method = RequestMethod.GET)
-  public Podcast getPodcastByName(@RequestParam(value = "name") String name) {
+  @RequestMapping(value = "/info/{name}", method = RequestMethod.GET)
+  public Podcast getPodcastByName(@PathVariable(value = "name") String name) {
     return podcastService.getPodcastByName(name);
   }
 
-  @RequestMapping(value = "/id", method = RequestMethod.GET)
-  public Podcast getPodcastByID(@RequestParam(value = "id") Long id) {
+  @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+  public Podcast getPodcastByID(@PathVariable(value = "id") Long id) {
     return podcastService.getPodcastByID(id);
   }
 }

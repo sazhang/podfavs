@@ -14,7 +14,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -31,9 +30,6 @@ public class PodcastRepositoryTest {
   public void testGetRecsGivenPodcastName() {
     String name = "NBC Meet the Press";
     Collection<Podcast> podcasts = podcastRepository.getRecsGivenPodcastName(name);
-    for (Podcast podcast : podcasts) {
-      System.out.println(podcast);
-    }
     assertEquals(9, podcasts.size());
   }
 
@@ -52,9 +48,9 @@ public class PodcastRepositoryTest {
    */
   @Test
   public void testGetPodcastsGivenWordsAnd() {
-    List<String> keywords = new ArrayList<>(Arrays.asList("yoga", "fitness"));
+    List<String> keywords = new ArrayList<>(Arrays.asList("political"));
     Collection<Podcast> podcasts = podcastRepository.getPodcastsGivenWordsAnd(keywords);
-    assertEquals(1, podcasts.size());
+    assertEquals(4, podcasts.size());
   }
 
   /**
