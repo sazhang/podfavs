@@ -12,7 +12,6 @@ import java.util.*;
  * Handle interactions with the {@PodcastRepository}.
  */
 @Service
-@Transactional
 public class PodcastService {
 
   private final PodcastRepository podcastRepository;
@@ -22,15 +21,28 @@ public class PodcastService {
     this.podcastRepository = podcastRepository;
   }
 
+  @Transactional(readOnly = true)
   public Collection<Podcast> getRecsGivenPodcastName(String name) {
     return podcastRepository.getRecsGivenPodcastName(name);
   }
 
+  @Transactional(readOnly = true)
   public Collection<Podcast> getPodcastsGivenWordsOr(List<String> keywords) {
     return podcastRepository.getPodcastsGivenWordsOr(keywords);
   }
 
+  @Transactional(readOnly = true)
   public Collection<Podcast> getPodcastsGivenWordsAnd(List<String> keywords) {
     return podcastRepository.getPodcastsGivenWordsAnd(keywords);
+  }
+
+  @Transactional(readOnly = true)
+  public Podcast getPodcastByName(String name) {
+    return podcastRepository.getPodcastByName(name);
+  }
+
+  @Transactional(readOnly = true)
+  public Podcast getPodcastByID(Long id) {
+    return podcastRepository.getPodcastByID(id);
   }
 }

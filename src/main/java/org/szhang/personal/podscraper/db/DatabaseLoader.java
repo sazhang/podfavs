@@ -27,8 +27,6 @@ import java.util.*;
 @ConditionalOnProperty(name = "pod.db.recreate", havingValue = "true")
 public class DatabaseLoader implements CommandLineRunner {
 
-  //private final static Logger log = LoggerFactory.getLogger(Application.class);
-
   private Map<String, Keyword> keywords;
   private Map<String, List<String>> podcastsByCategory;
   private Map<String, Podcast> allPodcasts;
@@ -71,7 +69,7 @@ public class DatabaseLoader implements CommandLineRunner {
     wait = new WebDriverWait(driver, 10);
 
     session = sessionFactory.openSession();
-    //session.purgeDatabase();
+    session.purgeDatabase();
     transaction = session.beginTransaction();
   }
 
@@ -114,6 +112,11 @@ public class DatabaseLoader implements CommandLineRunner {
       for (String podcastUrl : entry.getValue()) {
         driver.get(podcastUrl);
         String title;
+        double rating;
+        String image;
+        String kwString;
+        List<Keyword> keywordList;
+        String description;
         try {
           title = wait.until(ExpectedConditions.presenceOfElementLocated(
               By.xpath("//meta[@property='og:title']"))).getAttribute("content");
@@ -123,36 +126,23 @@ public class DatabaseLoader implements CommandLineRunner {
             session.save(allPodcasts.get(title));
             continue;
           }
-        } catch (Exception e) {
-          //unable to grab podcast title so skip
-          continue;
-        }
 
-        // try to grab podcast rating and image
-        double rating = 0;
-        String image = null;
-        try {
+          // try to grab podcast rating and image
           WebElement ratingElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
               By.xpath("//span[contains(@itemprop, 'ratingValue') and contains(@aria-hidden, 'true')]")));
           rating = Double.parseDouble(ratingElement.getText());
           image = wait.until(ExpectedConditions.presenceOfElementLocated(
               By.xpath("//meta[@property='og:image']"))).getAttribute("content");
-        } catch (Exception e) {
-          // rating and/or image may not exist but that's ok
-        }
 
-        // get keywords and description
-        List<Keyword> keywordList;
-        String description;
-        try {
-          // parse string of keywords
-          String kwString = wait.until(ExpectedConditions.presenceOfElementLocated(
+          // get keywords and description
+          kwString = wait.until(ExpectedConditions.presenceOfElementLocated(
               By.xpath("//meta[@name='keywords']"))).getAttribute("content");
           description = wait.until(ExpectedConditions.presenceOfElementLocated(
               By.xpath("//p[@id='feed-description-full']"))).getText();
-          keywordList = generateKeywords(kwString);
+          keywordList = generateKeywords(kwString); //TODO: not ideal...although keywords list size is much smaller
         } catch (Exception e) {
-          continue; // skip podcast w/out keywords and/or description
+          //unable to grab an attribute so skip
+          continue;
         }
         Podcast aPodcast = new Podcast(title, aCategory, description, rating, podcastUrl, image, keywordList);
         relatedPodcasts.add(aPodcast); // need to link category w/ list of podcasts

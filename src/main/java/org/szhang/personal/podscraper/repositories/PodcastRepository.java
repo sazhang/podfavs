@@ -18,10 +18,11 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
   /**
    * Find other podcasts that share the same keywords as the given podcast.
    *
-   * @param name  podcast name
+   * @param name podcast name
    * @return list of podcasts
    */
-  @Query("MATCH (p:Podcast {name:{name}})-[:TAGGED_AS]->(k)<-[:TAGGED_AS]-(p2) RETURN p, p2, k")
+  @Query("MATCH pod=(p:Podcast {name: {name}})-[:TAGGED_AS]->(k:Keyword)<-[:TAGGED_AS]-(p2) " +
+      "RETURN ID(p), pod, nodes(pod), rels(pod)")
   Collection<Podcast> getRecsGivenPodcastName(@Param("name") String name);
 
   /**
@@ -30,7 +31,7 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
    * @param keywords  list of keywords
    * @return podcasts
    */
-  @Query("MATCH (p:Podcast)-[:TAGGED_AS]->(k:Keyword) WHERE k.word in {keywords} RETURN p")
+  @Query("MATCH pod=(p:Podcast)-[:TAGGED_AS]->(k:Keyword) WHERE k.word in {keywords} RETURN ID(p), pod, nodes(pod), rels(pod)")
   Collection<Podcast> getPodcastsGivenWordsOr(@Param("keywords") List<String> keywords);
 
   /**
@@ -44,4 +45,21 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
       + "WHERE ALL(k in keywords WHERE (k)<-[:TAGGED_AS]-(p)) RETURN p")
   Collection<Podcast> getPodcastsGivenWordsAnd(@Param("keywords") List<String> keywords);
 
+  /**
+   * Get podcast entity by name.
+   *
+   * @param name podcast name
+   * @return podcast
+   */
+  @Query("MATCH pod=(p:Podcast {name: {name}})-[*]->() RETURN ID(p), pod, nodes(pod), rels(pod)")
+  Podcast getPodcastByName(@Param("name") String name);
+
+  /**
+   * Get podcast entity by id.
+   *
+   * @param id  assigned id
+   * @return podcast
+   */
+  @Query("MATCH pod=(p:Podcast)-[*]->() WHERE ID(p) = {id} RETURN ID(p), pod, nodes(pod), rels(pod)")
+  Podcast getPodcastByID(@Param("id") Long id);
 }

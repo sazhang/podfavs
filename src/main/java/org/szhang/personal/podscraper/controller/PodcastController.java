@@ -36,4 +36,14 @@ public class PodcastController {
   public Collection<Podcast> getPodcastsGivenWordsAnd(@RequestParam(value = "keywords") List<String> keywords) {
     return podcastService.getPodcastsGivenWordsAnd(keywords);
   }
+
+  @RequestMapping(value = "/info", method = RequestMethod.GET)
+  public Podcast getPodcastByName(@RequestParam(value = "name") String name) {
+    return podcastService.getPodcastByName(name);
+  }
+
+  @RequestMapping(value = "/id", method = RequestMethod.GET)
+  public Podcast getPodcastByID(@RequestParam(value = "id") Long id) {
+    return podcastService.getPodcastByID(id);
+  }
 }

@@ -1,6 +1,6 @@
 package org.szhang.personal.podscraper.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -14,7 +14,7 @@ public class Category extends Entity {
 
   private String category;
 
-  @JsonManagedReference
+  @JsonIgnoreProperties("categories")
   @Relationship(type = "BELONGS_TO", direction = Relationship.INCOMING)
   private List<Podcast> podcasts;
 
@@ -27,7 +27,7 @@ public class Category extends Entity {
     this.category = category;
   }
 
-  private Category() {
+  public Category() {
     // empty constructor required by neo4j api
   }
 

@@ -1,6 +1,6 @@
 package org.szhang.personal.podscraper.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -15,7 +15,7 @@ public class Host extends Entity {
 
   private String name;
 
-  @JsonBackReference
+  @JsonIgnoreProperties("hosts")
   @Relationship(type = "HOSTS")
   private List<Podcast> podcasts;
 
@@ -29,7 +29,7 @@ public class Host extends Entity {
     this.podcasts = new ArrayList<>();
   }
 
-  private Host() {
+  public Host() {
     // empty constructor required by neo4j api
   }
 

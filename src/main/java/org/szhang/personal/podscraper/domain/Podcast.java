@@ -1,7 +1,6 @@
 package org.szhang.personal.podscraper.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -20,15 +19,15 @@ public class Podcast extends Entity {
   private String url;
   private String imageUrl;
 
-  @JsonBackReference
+  @JsonIgnoreProperties("podcasts")
   @Relationship(type = "BELONGS_TO")
   private List<Category> categories;
 
-  @JsonBackReference
+  @JsonIgnoreProperties("podcasts")
   @Relationship(type = "TAGGED_AS")
   private List<Keyword> keywords;
 
-  @JsonManagedReference
+  @JsonIgnoreProperties("podcasts")
   @Relationship(type = "HOSTS", direction = Relationship.INCOMING)
   private List<Host> hosts; //TODO: stitcher does not provide these
 
@@ -56,7 +55,7 @@ public class Podcast extends Entity {
     this.keywords.addAll(keywords);
   }
 
-  private Podcast() {
+  public Podcast() {
     // empty constructor required by neo4j api
   }
 
@@ -162,9 +161,9 @@ public class Podcast extends Entity {
         ", rating=" + rating +
         ", url='" + url + '\'' +
         ", imageUrl='" + imageUrl + '\'' +
-        ", categories=" + categories +
-        ", keywords=" + keywords +
-        ", hosts=" + hosts +
+        //", categories=" + categories +
+        //", keywords=" + keywords +
+        //", hosts=" + hosts +
         '}';
   }
 }
