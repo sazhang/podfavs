@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d7b3d12-4288-4f26-bc4b-7e1f8c71c7cc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/controller/PodcastController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/controller/PodcastController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/repositories/PodcastRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/repositories/PodcastRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/services/PodcastService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/services/PodcastService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/web-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/web-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/web-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/web-app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/web-app/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/web-app/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/web-app/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/web-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/web-app/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/szhang/personal/podscraper/repositories/PodcastRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/szhang/personal/podscraper/repositories/PodcastRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -124,6 +115,7 @@
           <entry key="java" value="2268" />
           <entry key="js" value="1226" />
           <entry key="json" value="34" />
+          <entry key="md" value="563" />
           <entry key="properties" value="27" />
           <entry key="xml" value="4" />
         </counts>
@@ -135,6 +127,7 @@
           <entry key="JAVA" value="2268" />
           <entry key="JSON" value="34" />
           <entry key="JavaScript" value="1226" />
+          <entry key="Markdown" value="563" />
           <entry key="Properties" value="27" />
           <entry key="XML" value="4" />
         </counts>
@@ -146,6 +139,7 @@
           <entry key="java" value="28" />
           <entry key="js" value="2" />
           <entry key="json" value="2" />
+          <entry key="md" value="1" />
           <entry key="properties" value="5" />
           <entry key="xml" value="4" />
         </counts>
@@ -157,6 +151,7 @@
           <entry key="JAVA" value="28" />
           <entry key="JSON" value="2" />
           <entry key="JavaScript" value="2" />
+          <entry key="Markdown" value="1" />
           <entry key="Properties" value="5" />
           <entry key="XML" value="4" />
         </counts>
@@ -205,7 +200,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/web-app/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -220,11 +215,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/web-app/src/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
+            <state relative-caret-position="1088">
               <caret line="64" column="20" lean-forward="true" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="233">
+                <caret line="20" column="79" lean-forward="true" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -287,7 +294,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/events/PostSaveEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/service/GenericService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/service/ImportService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/util/StitcherCrawler.java" />
@@ -338,6 +344,7 @@
         <option value="$PROJECT_DIR$/src/main/web-app/src/App.css" />
         <option value="$PROJECT_DIR$/src/main/web-app/src/Home.js" />
         <option value="$PROJECT_DIR$/src/main/web-app/src/App.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -440,29 +447,6 @@
               <item name="podscraper" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="web-app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="web-app" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="web-app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -478,7 +462,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547544632119" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547545879199" />
     <property name="jsx.switch.disabled" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -668,7 +652,7 @@
       <workItem from="1547378658942" duration="14000" />
       <workItem from="1547383553565" duration="28258000" />
       <workItem from="1547451472202" duration="1511000" />
-      <workItem from="1547453326596" duration="34740000" />
+      <workItem from="1547453326596" duration="35985000" />
     </task>
     <servers />
   </component>
@@ -705,7 +689,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="244882000" />
+    <option name="totallyTimeSpent" value="246127000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -720,7 +704,7 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14736842" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14736842" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -735,7 +719,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3291815" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.31494662" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.31494662" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="9" weight="0.32384342" />
       <window_info anchor="bottom" id="Run Dashboard" order="10" weight="0.48398575" />
@@ -763,7 +747,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/events/PostSaveEvent.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/events/PreSaveEvent.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/service/GenericService.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.0.5.RELEASE/spring-boot-autoconfigure-2.0.5.RELEASE.jar!/org/springframework/boot/autoconfigure/data/neo4j/Neo4jProperties.class" />
@@ -980,16 +963,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/web-app/src/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="64" column="20" lean-forward="true" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/web-app/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -997,6 +970,26 @@
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web-app/src/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="64" column="20" lean-forward="true" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="233">
+            <caret line="20" column="79" lean-forward="true" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
