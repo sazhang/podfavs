@@ -26,7 +26,7 @@ public class PodcastService {
 
   @Transactional(readOnly = true)
   public Page<Podcast> findSomePodcasts() {
-    Pageable pageable = PageRequest.of(0, 3);
+    Pageable pageable = PageRequest.of(0, 15);
     return podcastRepository.findAll(pageable, 0);
   }
 
