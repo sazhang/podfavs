@@ -30,6 +30,11 @@ public class PodcastService {
     return podcastRepository.findAll(pageable, 0);
   }
 
+  /*@Transactional(readOnly = true)
+  public Collection<Podcast> getRecsBasedOnSearch(List<String> words) {
+    return podcastRepository.getRecsBasedOnSearch(words);
+  }*/
+
   @Transactional(readOnly = true)
   public Collection<Podcast> getRecsGivenPodcastName(String name) {
     return podcastRepository.getRecsGivenPodcastName(name);

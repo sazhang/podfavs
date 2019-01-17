@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Container, CardDeck, Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import { CardDeck } from "reactstrap";
 import PodcastItem from "./PodcastItem";
 import PropTypes from "prop-types";
 
 //Render a list of podcasts.
-class Podcasts extends Component {
+class FeaturedPodcasts extends Component {
+  
   render() {
+    const someList = this.props.podcasts;
     // populate the table with podcast components
-    return this.props.podcasts.map(podcast => (
+    return someList.map(podcast => (
       <CardDeck style={cardDeckStyle}>
         <PodcastItem key={podcast.id} podcast={podcast} />
       </CardDeck>
@@ -16,16 +17,18 @@ class Podcasts extends Component {
   }
 }
 
-Podcasts.propTypes = {
+FeaturedPodcasts.propTypes = {
   podcasts: PropTypes.array.isRequired
 };
 
 const cardDeckStyle = {
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "space-around",
   flex: "auto",
-  flexFlow: "row wrap"
+  flexFlow: "row wrap",
+  margin: "0 auto",
+  backgroundColor: "#FED766"
 };
 
-export default Podcasts;
+export default FeaturedPodcasts;

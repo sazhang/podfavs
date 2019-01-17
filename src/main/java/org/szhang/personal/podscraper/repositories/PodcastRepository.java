@@ -16,6 +16,16 @@ import java.util.List;
 public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
 
   /**
+   * Recommend podcasts based on user input.
+   *
+   * @param input   user input that can be podcast name and/or keywords
+   * @return list of podcasts
+   */
+  /*@Query("MATCH pod=(p:Podcast {name: {name}})-[:TAGGED_AS]->(k:Keyword)<-[:TAGGED_AS]-(p2) " +
+      "RETURN ID(p), ID(p2), pod")
+  Collection<Podcast> getRecsBasedOnSearch(@Param("words") List<String> words);*/
+
+  /**
    * Find other podcasts that share the same keywords as the given podcast.
    *
    * @param name podcast name

@@ -1,29 +1,4 @@
-:root {
-  --light-boy-blue: #6A7FDB;
-  --sage: #B6D094;
-  --smoky-black: #110B11;
-  --bedez-blue: #274690;
-  --magic-potion: #FF4365;
-}
-
-tbody {
-  font-family: 'Lato Regular', sans-serif;
-  color: var(--smoky-black);
-}
-
-.container, .container-fluid {
-  margin-top: 20px;
-}
-
-h3, .mt-4 {
-  font-family: 'Abril Fatface Regular', cursive;
-  font-weight: normal;
-}
-
-h3 {
-  color: var(--bedez-blue);
-}
-
-th {
-  color: var(--magic-potion);
+body {
+  max-width: 100%;
+  max-height: 100%;
 }

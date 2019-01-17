@@ -79,4 +79,9 @@ public class PodcastRepositoryTest {
     List<Category> categories = result.getCategories();
     assertEquals(1, categories.size());
   }
+
+  @Test
+  public void testGetRecsBasedOnSearch() {
+
+  }
 }

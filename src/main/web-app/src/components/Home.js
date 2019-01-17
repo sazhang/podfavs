@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "../App.css";
-import Podcasts from "./Podcasts";
-import { Container, CardDeck, Row, Col } from "reactstrap";
+import FeaturedPodcasts from "./FeaturedPodcasts";
+import { Container, Row } from "reactstrap";
+import SearchBar from "./SearchBar";
 
 // This landing page showcases a few podcasts.
 class Home extends Component {
@@ -19,31 +20,34 @@ class Home extends Component {
       );
   }
 
+  handleSubmit(someList) {
+    console.log("Entered handle submit...");
+    this.setState({ someList: someList });
+  }
+
   render() {
-    const { someList, isLoading } = this.state;
-    if (isLoading) {
+    if (this.state.isLoading) {
       return <p>Loading...</p>;
     }
-
-    console.log(this.state.someList);
-
     return (
-      <div>
-        <h1>Home</h1>
-        <Container fluid style={containerStyle}>
+      <div style={divStyle}>
+        <SearchBar onHandleSubmit={this.handleSubmit} />
+        <Container>
+          <h2>Featured podcasts</h2>
           <Row>
-            <Podcasts podcasts={this.state.someList}/>
+            <FeaturedPodcasts podcasts={this.state.someList} />
           </Row>
         </Container>
-        <h1>Footer</h1>
       </div>
     );
   }
 }
 
-const containerStyle = {
-  alignItems: "center",
-  justifyContent: "center",
-}
+const divStyle = {
+  fontFamily: "houschka-rounded, sans-serif",
+  maxWidth: "100%",
+  maxHeight: "100%",
+  backgroundColor: "#B8D5B8"
+};
 
 export default Home;

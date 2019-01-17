@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, CardTitle, CardText, CardImg, CardImgOverlay } from "reactstrap";
+import { Card, CardImg } from "reactstrap";
 
 export class PodcastItem extends Component {
 
@@ -11,7 +11,7 @@ export class PodcastItem extends Component {
       <div>
         <Card inverse style={cardStyle}>
           <CardImg src={aPodcast.imageUrl} alt="Card image cap"/>
-          <CardImgOverlay style={{ backgroundColor: "#333", opacity: "0.5" }}></CardImgOverlay>
+          {/* <CardImgOverlay style={{ backgroundColor: "#333", opacity: "0.5" }}></CardImgOverlay> */}
         </Card>
         <br/>
       </div>
@@ -31,9 +31,9 @@ const overlayStyle = {
 }
 
 const cardStyle = {
-  height: "auto",
-  width: "14rem",
-  alignSelf: "center"
+  width: "200px",
+  height: "200px",
+  margin: "0 auto"
 };
 
 export default PodcastItem;
