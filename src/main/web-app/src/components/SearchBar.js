@@ -1,38 +1,35 @@
 import React, { Component } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
+library.add(faSearch);
+
+// Allow the user to get podcast recommendations by inputting keywords.
 export class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { input: '', currentList: [] };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    console.log("Entered handle change...");
-    this.setState({ input: event.target.value });
+    this.props.onHandleChange(event.target.value);
   }
 
   handleSubmit(event) {
-    var url = "api/rec/" + encodeURI(this.state.input);
-    console.log(url);
-    fetch(url)
-      .then(response => response.json());
-    //  .then(data => this.setState({ currentList: data.content }));
-    console.log(this.state.currentList);
-    //this.props.onHandleSubmit(this.state.currentList);
     event.preventDefault();
+    this.props.onHandleSubmit();
   }
 
   render() {
     return (
       <Container style={barStyle}>
         <Form inline onSubmit={this.handleSubmit}>
-          <FormGroup>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
             <Label for="searchIt" style={formLabel}>
-              Find your new favorite podcast.
+            Find your new favorite podcast. 
             </Label>
             &nbsp; &nbsp;
             <Input
@@ -40,13 +37,12 @@ export class SearchBar extends Component {
               name="search"
               id="searchIt"
               placeholder="Search by title, keywords..."
-              size="40"
-              value={this.state.input}
+              //size="40"
+              value={this.props.userInput}
               onChange={this.handleChange}
             />
           </FormGroup>
-          &nbsp; &nbsp;
-          <Button style={{ backgroundColor: "#228CDB" }}>Submit</Button>
+          <Button style={{ backgroundColor: "#007FFF" }}><FontAwesomeIcon icon="search" /></Button>
         </Form>
       </Container>
     );
@@ -54,14 +50,14 @@ export class SearchBar extends Component {
 }
 
 const barStyle = {
-  backgroundColor: "#D7B49E",
-  marginTop: "20px",
-  marginBottom: "40px"
+  //backgroundColor: "#D7B49E",
+  marginTop: '20px',
+  marginBottom: '40px'
 };
 
 const formLabel = {
-  fontSize: "2em",
-  textDecoration: "underline #228CDB"
+  fontSize: '2.5em',
+  color: '#007FFF'
 };
 
 export default SearchBar;

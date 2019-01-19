@@ -4,25 +4,32 @@ import FeaturedPodcasts from "./FeaturedPodcasts";
 import { Container, Row } from "reactstrap";
 import SearchBar from "./SearchBar";
 
-// This landing page showcases a few podcasts.
+// Landing page with a search bar and default list of podcasts.
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { someList: [], isLoading: true };
+    this.state = { podcastList: [], userInput: '', title: 'Featured podcasts', isLoading: true };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.setState({ isLoading: true });
     fetch("api/")
       .then(response => response.json())
-      .then(data =>
-        this.setState({ someList: data.content, isLoading: false })
-      );
+      .then(data => this.setState({ podcastList: data.content, isLoading: false }));
   }
 
-  handleSubmit(someList) {
-    console.log("Entered handle submit...");
-    this.setState({ someList: someList });
+  handleChange(userInput) {
+    this.setState({ userInput: userInput });
+  }
+
+  handleSubmit() {
+    var url = "api/search/" + encodeURI(this.state.userInput);
+    console.log(url);
+    fetch(url)
+      .then(response => response.json())
+      .then(data => this.setState({ podcastList: data, title: 'Podcasts you might like' }));
   }
 
   render() {
@@ -31,11 +38,14 @@ class Home extends Component {
     }
     return (
       <div style={divStyle}>
-        <SearchBar onHandleSubmit={this.handleSubmit} />
+        <SearchBar 
+        userInput={this.state.userInput}
+        onHandleChange={this.handleChange}
+        onHandleSubmit={this.handleSubmit} />
         <Container>
-          <h2>Featured podcasts</h2>
+          <h2 style={{ textDecoration: "underline #EA638C" }}>{this.state.title}</h2>
           <Row>
-            <FeaturedPodcasts podcasts={this.state.someList} />
+            <FeaturedPodcasts podcastList={this.state.podcastList} />
           </Row>
         </Container>
       </div>
@@ -44,10 +54,11 @@ class Home extends Component {
 }
 
 const divStyle = {
+  //backgroundColor: "#B8D5B8",
+  color: '#2B303A',
   fontFamily: "houschka-rounded, sans-serif",
   maxWidth: "100%",
-  maxHeight: "100%",
-  backgroundColor: "#B8D5B8"
+  maxHeight: "100%"
 };
 
 export default Home;

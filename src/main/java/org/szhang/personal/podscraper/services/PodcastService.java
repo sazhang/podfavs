@@ -30,10 +30,25 @@ public class PodcastService {
     return podcastRepository.findAll(pageable, 0);
   }
 
-  /*@Transactional(readOnly = true)
+  @Transactional(readOnly = true)
   public Collection<Podcast> getRecsBasedOnSearch(List<String> words) {
-    return podcastRepository.getRecsBasedOnSearch(words);
-  }*/
+    Collection<Podcast> podcasts = podcastRepository.getRecsBasedOnSearch(words);
+    if (podcasts.isEmpty()) {
+      podcasts = podcastRepository.getBackupRecs(words);
+    }
+    int counter = 0;
+    while (counter < words.size()) {
+      String word = words.get(counter);
+      podcasts.removeIf(p -> p.getName().equals(word));
+      counter++;
+    }
+    return podcasts;
+  }
+
+  @Transactional(readOnly = true)
+  public Collection<Podcast> getBackupRecs(List<String> words) {
+    return podcastRepository.getBackupRecs(words);
+  }
 
   @Transactional(readOnly = true)
   public Collection<Podcast> getRecsGivenPodcastName(String name) {

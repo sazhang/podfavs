@@ -18,12 +18,23 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
   /**
    * Recommend podcasts based on user input.
    *
-   * @param input   user input that can be podcast name and/or keywords
+   * @param words   user input that can be podcast name and/or keywords
    * @return list of podcasts
    */
-  /*@Query("MATCH pod=(p:Podcast {name: {name}})-[:TAGGED_AS]->(k:Keyword)<-[:TAGGED_AS]-(p2) " +
-      "RETURN ID(p), ID(p2), pod")
-  Collection<Podcast> getRecsBasedOnSearch(@Param("words") List<String> words);*/
+  @Query("MATCH pod=(p:Podcast)-[:TAGGED_AS]->(k:Keyword)<-[:TAGGED_AS]-(p2) WHERE p.name in {words} " +
+      "OR k.word in {words} RETURN ID(p2), pod")
+  Collection<Podcast> getRecsBasedOnSearch(@Param("words") List<String> words);
+
+  /**
+   * If getRecsBasedOnSearch returns an empty list, check if any podcast name or
+   * keywords contain the user given words.
+   *
+   * @param words   user input that can be podcast name and/or keywords
+   * @return list of podcasts
+   */
+  @Query("UNWIND {words} AS word MATCH pod=(p:Podcast)-[:TAGGED_AS]->(k:Keyword)<-[:TAGGED_AS]-(p2) "
+      + "WHERE lower(p.name) CONTAINS lower(word) RETURN ID(p2), pod LIMIT 15")
+  Collection<Podcast> getBackupRecs(@Param("words") List<String> words);
 
   /**
    * Find other podcasts that share the same keywords as the given podcast.

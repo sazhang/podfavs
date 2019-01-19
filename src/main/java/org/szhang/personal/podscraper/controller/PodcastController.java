@@ -28,11 +28,11 @@ public class PodcastController {
     return podcastService.findSomePodcasts();
   }
 
-  /*@RequestMapping(value = "/search/{words}", method = RequestMethod.GET)
+  @RequestMapping(value = "/search/{words}", method = RequestMethod.GET)
   public Collection<Podcast> getRecsBasedOnSearch(@PathVariable(value = "words") List<String> words) {
     return podcastService.getRecsBasedOnSearch(words);
   }
-*/
+
   @RequestMapping(value = "/rec/{name}", method = RequestMethod.GET)
   public Collection<Podcast> getRecsGivenPodcastName(@PathVariable(value = "name") String name) {
     return podcastService.getRecsGivenPodcastName(name);

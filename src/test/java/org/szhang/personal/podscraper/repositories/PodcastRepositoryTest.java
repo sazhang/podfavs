@@ -82,6 +82,17 @@ public class PodcastRepositoryTest {
 
   @Test
   public void testGetRecsBasedOnSearch() {
+    List<String> words = new ArrayList<>(Arrays.asList("tech", "Page Seven"));
+    Collection<Podcast> podcasts = podcastRepository.getRecsBasedOnSearch(words);
+    assertEquals(9, podcasts.size());
+  }
 
+  @Test
+  public void testgetBackupRecs() {
+    List<String> words = new ArrayList<>(Arrays.asList("how i built"));
+    Collection<Podcast> firstTry = podcastRepository.getRecsBasedOnSearch(words);
+    assertEquals(0, firstTry.size());
+    Collection<Podcast> backup = podcastRepository.getBackupRecs(words);
+    assertEquals(4, backup.size());
   }
 }
