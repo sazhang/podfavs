@@ -30,7 +30,7 @@ public class PodcastRepositoryTest {
   public void testGetRecsGivenPodcastName() {
     String name = "NBC Meet the Press";
     Collection<Podcast> podcasts = podcastRepository.getRecsGivenPodcastName(name);
-    assertEquals(9, podcasts.size());
+    assertEquals(8, podcasts.size());
   }
 
   /**
