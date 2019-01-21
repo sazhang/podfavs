@@ -2,7 +2,7 @@
 <project name="maven-antrun-" default="main"  >
 <target name="main">
   <copy todir="C:\podscraper\target/classes/public">
-    <fileset dir="C:\podscraper/src/main/frontend/build"/>
+    <fileset dir="C:\podscraper/frontend/build"/>
   </copy>
 </target>
 </project>
