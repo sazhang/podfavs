@@ -80,19 +80,22 @@ public class PodcastRepositoryTest {
     assertEquals(1, categories.size());
   }
 
+  /**
+   * Test both getRecsBasedOnSearch and getPodcastsByIds methods in {@PodcastRepository}
+   */
   @Test
   public void testGetRecsBasedOnSearch() {
-    List<String> words = new ArrayList<>(Arrays.asList("tech", "Page Seven"));
-    Collection<Podcast> podcasts = podcastRepository.getRecsBasedOnSearch(words);
-    assertEquals(9, podcasts.size());
-  }
-
-  @Test
-  public void testgetBackupRecs() {
-    List<String> words = new ArrayList<>(Arrays.asList("how i built"));
-    Collection<Podcast> firstTry = podcastRepository.getRecsBasedOnSearch(words);
-    assertEquals(0, firstTry.size());
-    Collection<Podcast> backup = podcastRepository.getBackupRecs(words);
-    assertEquals(4, backup.size());
+    List<String> words = new ArrayList<>(Arrays.asList("how i built", "tech", "politics"));
+    Iterable<Map<String,Object>> results = podcastRepository.getRecsBasedOnSearch(words);
+    List<Long> ids = new ArrayList<>();
+    for (Map<String,Object> map : results) {
+      ids.add((Long) map.get("ids"));
+    }
+    assertEquals(15, ids.size());
+    Collection<Podcast> podcasts = podcastRepository.getPodcastsByIds(ids);
+    assertEquals(15, podcasts.size());
+    Podcast aPodcast = podcasts.iterator().next();
+    assertEquals(13, aPodcast.getKeywords().size());
+    assertEquals(1, aPodcast.getCategories().size());
   }
 }

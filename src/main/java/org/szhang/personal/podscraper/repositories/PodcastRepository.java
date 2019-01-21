@@ -1,6 +1,7 @@
 package org.szhang.personal.podscraper.repositories;
 
 import org.springframework.data.neo4j.annotation.Query;
+import org.springframework.data.neo4j.annotation.QueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,7 @@ import org.szhang.personal.podscraper.domain.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Support queries of {@Podcast} nodes & relationships.
@@ -21,20 +23,31 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
    * @param words   user input that can be podcast name and/or keywords
    * @return list of podcasts
    */
-  @Query("MATCH pod=(p:Podcast)-[:TAGGED_AS]->(k:Keyword)<-[:TAGGED_AS]-(p2) WHERE p.name in {words} " +
-      "OR k.word in {words} RETURN ID(p2), pod")
-  Collection<Podcast> getRecsBasedOnSearch(@Param("words") List<String> words);
+  @Query("UNWIND {words} AS word MATCH (p:Podcast)-[:TAGGED_AS]->(k:Keyword)<-[:TAGGED_AS]-(p2) " +
+      "WHERE lower(p.name) CONTAINS lower(word) OR lower(k.word) CONTAINS lower(word) " +
+      "OR lower(p.description) CONTAINS lower(word) " +
+      "OPTIONAL MATCH (p)-[:BELONGS_TO]->(c:Category)<-[:BELONGS_TO]-(p2) " +
+      "WHERE lower(c.category) CONTAINS lower(word) OR lower(p.description) CONTAINS lower(word) " +
+      "OR lower(p.name) CONTAINS lower(word) RETURN id(p) as ids, count(p) as freq ORDER BY freq DESC LIMIT 15")
+  Iterable<Map<String,Object>> getRecsBasedOnSearch(@Param("words") List<String> words);
 
   /**
-   * If getRecsBasedOnSearch returns an empty list, check if any podcast name or
-   * keywords contain the user given words.
+   * Get all podcasts matching the given ids.
    *
-   * @param words   user input that can be podcast name and/or keywords
-   * @return list of podcasts
+   * @param ids   list of ids
+   * @return podcasts
    */
-  @Query("UNWIND {words} AS word MATCH pod=(p:Podcast)-[:TAGGED_AS]->(k:Keyword)<-[:TAGGED_AS]-(p2) "
-      + "WHERE lower(p.name) CONTAINS lower(word) RETURN ID(p2), pod LIMIT 15")
-  Collection<Podcast> getBackupRecs(@Param("words") List<String> words);
+  @Query("UNWIND {ids} AS id MATCH pod=(p:Podcast)-[*]->() WHERE ID(p) = id RETURN pod, nodes(pod), rels(pod)")
+  Collection<Podcast> getPodcastsByIds(@Param("ids") List<Long> ids);
+
+  /**
+   * Get podcast entity by id.
+   *
+   * @param id  assigned id
+   * @return podcast
+   */
+  @Query("MATCH pod=(p:Podcast)-[*]->() WHERE ID(p) = {id} RETURN pod, nodes(pod), rels(pod)")
+  Podcast getPodcastByID(@Param("id") Long id);
 
   /**
    * Find other podcasts that share the same keywords as the given podcast.
@@ -74,13 +87,4 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
    */
   @Query("MATCH pod=(p:Podcast {name: {name}})-[*]->() RETURN pod, nodes(pod), rels(pod)")
   Podcast getPodcastByName(@Param("name") String name);
-
-  /**
-   * Get podcast entity by id.
-   *
-   * @param id  assigned id
-   * @return podcast
-   */
-  @Query("MATCH pod=(p:Podcast)-[*]->() WHERE ID(p) = {id} RETURN pod, nodes(pod), rels(pod)")
-  Podcast getPodcastByID(@Param("id") Long id);
 }

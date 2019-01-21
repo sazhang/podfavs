@@ -1,5 +1,5 @@
 # Podcast Recommender
-Scrapes information about podcasts from Stitcher List.
+Get podcast recommendations by title and/or keywords (e.g., tech, politics).
 
 ### Tech stack:
 * Application code: Java, Selenium (for web scraping)
@@ -19,3 +19,11 @@ Scrapes information about podcasts from Stitcher List.
 #### React -
 * [Intro to React](https://reactjs.org/tutorial/tutorial.html)
 * [react-router](https://reacttraining.com/react-router/web/guides/quick-start)
+
+#### Configuring Spring Boot & React
+* [Create React App with Spring Boot](https://github.com/kantega/react-and-spring)
+* [Frontend maven plugin](https://github.com/eirslett/frontend-maven-plugin)
+
+#### Spring Boot on AWS
+* [Using AWS Elastic Beanstalk](https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/)
+* []

@@ -33,7 +33,12 @@ public class PodcastController {
     return podcastService.getRecsBasedOnSearch(words);
   }
 
-  @RequestMapping(value = "/rec/{name}", method = RequestMethod.GET)
+  @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+  public Podcast getPodcastByID(@PathVariable(value = "id") Long id) {
+    return podcastService.getPodcastByID(id);
+  }
+
+  /*@RequestMapping(value = "/rec/{name}", method = RequestMethod.GET)
   public Collection<Podcast> getRecsGivenPodcastName(@PathVariable(value = "name") String name) {
     return podcastService.getRecsGivenPodcastName(name);
   }
@@ -51,10 +56,5 @@ public class PodcastController {
   @RequestMapping(value = "/info/{name}", method = RequestMethod.GET)
   public Podcast getPodcastByName(@PathVariable(value = "name") String name) {
     return podcastService.getPodcastByName(name);
-  }
-
-  @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
-  public Podcast getPodcastByID(@PathVariable(value = "id") Long id) {
-    return podcastService.getPodcastByID(id);
-  }
+  }*/
 }

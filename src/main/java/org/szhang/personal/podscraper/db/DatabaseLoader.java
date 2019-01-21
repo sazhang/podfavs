@@ -104,7 +104,7 @@ public class DatabaseLoader implements CommandLineRunner {
   /**
    * By category, go to each podcast profile and get the show's info.
    */
-  private void getEachPodcastDetails() {
+  private void getEachPodcastDetails() { //TODO: pretty slow
     for (Map.Entry<String, List<String>> entry : podcastsByCategory.entrySet()) {
       Category aCategory = new Category(entry.getKey());
       List<Podcast> relatedPodcasts = new ArrayList<>();

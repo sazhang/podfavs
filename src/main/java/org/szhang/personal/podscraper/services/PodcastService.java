@@ -32,25 +32,20 @@ public class PodcastService {
 
   @Transactional(readOnly = true)
   public Collection<Podcast> getRecsBasedOnSearch(List<String> words) {
-    Collection<Podcast> podcasts = podcastRepository.getRecsBasedOnSearch(words);
-    if (podcasts.isEmpty()) {
-      podcasts = podcastRepository.getBackupRecs(words);
+    Iterable<Map<String,Object>> results = podcastRepository.getRecsBasedOnSearch(words);
+    List<Long> ids = new ArrayList<>();
+    for (Map<String,Object> map : results) {
+      ids.add((Long) map.get("ids"));
     }
-    int counter = 0;
-    while (counter < words.size()) {
-      String word = words.get(counter);
-      podcasts.removeIf(p -> p.getName().equals(word));
-      counter++;
-    }
-    return podcasts;
+    return podcastRepository.getPodcastsByIds(ids);
   }
 
   @Transactional(readOnly = true)
-  public Collection<Podcast> getBackupRecs(List<String> words) {
-    return podcastRepository.getBackupRecs(words);
+  public Podcast getPodcastByID(Long id) {
+    return podcastRepository.getPodcastByID(id);
   }
 
-  @Transactional(readOnly = true)
+  /*@Transactional(readOnly = true)
   public Collection<Podcast> getRecsGivenPodcastName(String name) {
     return podcastRepository.getRecsGivenPodcastName(name);
   }
@@ -68,10 +63,5 @@ public class PodcastService {
   @Transactional(readOnly = true)
   public Podcast getPodcastByName(String name) {
     return podcastRepository.getPodcastByName(name);
-  }
-
-  @Transactional(readOnly = true)
-  public Podcast getPodcastByID(Long id) {
-    return podcastRepository.getPodcastByID(id);
-  }
+  }*/
 }
