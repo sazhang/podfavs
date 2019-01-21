@@ -2,38 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d7b3d12-4288-4f26-bc4b-7e1f8c71c7cc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/components/FeaturedPodcasts.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/FeaturedPodcasts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/components/PodcastItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PodcastItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/components/SearchBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SearchBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/serviceWorker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/antrun/build-main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/antrun/build-main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SearchBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SearchBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/MyConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/MyConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/db/DatabaseLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/db/DatabaseLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/public/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/public/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/precache-manifest.787b35334687bd1a1942611b943ed835.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/public/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/static/css/1.3f1fac8f.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/static/css/1.3f1fac8f.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/static/css/main.c3783d02.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/static/css/main.c3783d02.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/static/js/1.34b9b1c6.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/static/js/1.34b9b1c6.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/static/js/main.2a118eaf.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/static/js/main.2a118eaf.chunk.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/podscraper-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/podscraper-1.0-SNAPSHOT.jar.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.szhang.personal.podscraper.repositories.PodcastRepositoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.szhang.personal.podscraper.repositories.PodcastRepositoryTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.szhang.personal.podscraper.repositories.PodcastRepositoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/org.szhang.personal.podscraper.repositories.PodcastRepositoryTest.txt" afterDir="false" />
@@ -136,23 +112,25 @@
     <session id="-433347068">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.11" value="2" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="57" />
           <entry key="html" value="47" />
-          <entry key="java" value="3762" />
+          <entry key="java" value="3794" />
           <entry key="js" value="1519" />
-          <entry key="json" value="55" />
+          <entry key="json" value="63" />
           <entry key="md" value="918" />
-          <entry key="properties" value="42" />
+          <entry key="properties" value="70" />
           <entry key="xml" value="36" />
         </counts>
       </usages-collector>
@@ -160,24 +138,24 @@
         <counts>
           <entry key="CSS" value="57" />
           <entry key="HTML" value="47" />
-          <entry key="JAVA" value="3762" />
-          <entry key="JSON" value="55" />
+          <entry key="JAVA" value="3794" />
+          <entry key="JSON" value="63" />
           <entry key="JavaScript" value="1519" />
           <entry key="Markdown" value="918" />
-          <entry key="Properties" value="42" />
+          <entry key="Properties" value="70" />
           <entry key="XML" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
-          <entry key="gitignore" value="1" />
+          <entry key="gitignore" value="4" />
           <entry key="html" value="3" />
-          <entry key="java" value="50" />
+          <entry key="java" value="52" />
           <entry key="js" value="9" />
           <entry key="json" value="8" />
-          <entry key="md" value="2" />
-          <entry key="properties" value="8" />
+          <entry key="md" value="3" />
+          <entry key="properties" value="9" />
           <entry key="xml" value="6" />
         </counts>
       </usages-collector>
@@ -185,12 +163,12 @@
         <counts>
           <entry key="CSS" value="1" />
           <entry key="HTML" value="3" />
-          <entry key="JAVA" value="50" />
+          <entry key="JAVA" value="52" />
           <entry key="JSON" value="8" />
           <entry key="JavaScript" value="9" />
-          <entry key="Markdown" value="2" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Properties" value="8" />
+          <entry key="Markdown" value="3" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Properties" value="9" />
           <entry key="XML" value="6" />
         </counts>
       </usages-collector>
@@ -199,28 +177,73 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="file://$PROJECT_DIR$/frontend/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2108">
-              <caret line="124" column="31" selection-start-line="124" selection-start-column="31" selection-end-line="124" selection-end-column="31" />
+            <state relative-caret-position="204">
+              <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/package.json">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+            <state relative-caret-position="68">
+              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/MyConfiguration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+            <state relative-caret-position="187">
+              <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="476">
+                <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="4" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/szhang/personal/podscraper/repositories/PodcastRepositoryTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1394">
+              <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -231,25 +254,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/Application.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/db/DatabaseLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1394">
-              <caret line="102" selection-start-line="102" selection-end-line="102" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="340">
+              <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -295,8 +303,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/service/impl/ImportServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/service/ImportServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/controller/ImportController.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/util/StitcherScraper.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/Application.java" />
@@ -319,7 +325,6 @@
         <option value="$PROJECT_DIR$/src/main/frontend/public/index.html" />
         <option value="$PROJECT_DIR$/src/main/frontend/src/App.js" />
         <option value="$PROJECT_DIR$/src/main/frontend/src/index.js" />
-        <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/MyConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/domain/PodcastQueryResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/domain/PodcastRecsQueryResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/domain/Tag.java" />
@@ -338,14 +343,17 @@
         <option value="$PROJECT_DIR$/src/main/web-app/src/components/Home.js" />
         <option value="$PROJECT_DIR$/src/main/frontend/package-lock.json" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/db/DatabaseLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/services/PodcastService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/controller/PodcastController.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/repositories/PodcastRepository.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/szhang/personal/podscraper/repositories/PodcastRepositoryTest.java" />
         <option value="$PROJECT_DIR$/src/main/frontend/package.json" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/MyConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/db/DatabaseLoader.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/frontend/package.json" />
       </list>
     </option>
   </component>
@@ -386,7 +394,7 @@
       <path value="$PROJECT_DIR$/frontend/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-12" />
     <option name="y" value="9" />
     <option name="width" value="1440" />
@@ -397,12 +405,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
               <item name="podscraper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
@@ -414,6 +429,30 @@
               <item name="podscraper" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="podscraper" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="podscraper" type="b2602c69:ProjectViewProjectNode" />
@@ -447,8 +486,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -459,7 +496,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548030963516" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548057216462" />
     <property name="jsx.switch.disabled" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -506,7 +543,7 @@
     </option>
     <option name="contentProportion" value="0.08450704" />
   </component>
-  <component name="RunManager" selected="JUnit.PodcastRepositoryTest.testGetRecsBasedOnSearch">
+  <component name="RunManager" selected="Spring Boot.Application (1)">
     <configuration name="PodcastRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="podscraper" />
       <extension name="coverage">
@@ -640,7 +677,9 @@
       <workItem from="1547584799955" duration="16697000" />
       <workItem from="1547848110565" duration="11198000" />
       <workItem from="1547957773848" duration="20261000" />
-      <workItem from="1548034004829" duration="608000" />
+      <workItem from="1548034004829" duration="2686000" />
+      <workItem from="1548040397405" duration="2566000" />
+      <workItem from="1548056928144" duration="775000" />
     </task>
     <servers />
   </component>
@@ -677,7 +716,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="295042000" />
+    <option name="totallyTimeSpent" value="300461000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -689,10 +728,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1708502" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1757085" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -710,7 +748,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.31627056" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="9" weight="0.5569395" />
-      <window_info anchor="bottom" id="Run Dashboard" order="10" weight="0.16014235" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="10" visible="true" weight="0.35231316" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.3291815" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="13" show_stripe_button="false" />
@@ -811,13 +849,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/MyConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="28" column="41" lean-forward="true" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/domain/Keyword.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -868,16 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="402">
-            <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/domain/Podcast.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -907,16 +928,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/szhang/personal/podscraper/repositories/PodcastRepositoryTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -940,31 +951,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+        <state relative-caret-position="204">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="476">
+            <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="4" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/szhang/personal/podscraper/repositories/PodcastRepositoryTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/build/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/db/DatabaseLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="340">
+          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -978,10 +1010,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/MyConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        <state relative-caret-position="153">
+          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/szhang/personal/podscraper/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

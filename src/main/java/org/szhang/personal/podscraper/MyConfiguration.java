@@ -15,13 +15,13 @@ public class MyConfiguration {
 
   private static final String BASE_PACKAGE = "org.szhang.personal.podscraper.domain";
 
-  @Value("${spring.data.neo4j.uri}")
+  @Value("${DB_URL}")
   private String databaseUrl;
 
-  @Value("${spring.data.neo4j.username}")
+  @Value("${DB_USERNAME}")
   private String userName;
 
-  @Value("${spring.data.neo4j.password}")
+  @Value("${DB_PASSWORD}")
   private String password;
 
   @Bean

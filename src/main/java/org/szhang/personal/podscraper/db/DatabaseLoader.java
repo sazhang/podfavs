@@ -24,7 +24,7 @@ import java.util.*;
  * Scrape Sticher Lists of podcasts and load the data into neo4j.
  */
 @Component
-@ConditionalOnProperty(name = "pod.db.recreate", havingValue = "true")
+@ConditionalOnProperty(name = "DB_RECREATE", havingValue = "true")
 public class DatabaseLoader implements CommandLineRunner {
 
   private Map<String, Keyword> keywords;
