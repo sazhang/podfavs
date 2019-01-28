@@ -26,4 +26,3 @@ Get podcast recommendations by title and/or keywords (e.g., tech, politics).
 
 #### Spring Boot on AWS
 * [Using AWS Elastic Beanstalk](https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/)
-* []

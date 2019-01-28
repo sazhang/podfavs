@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import {Container, Form, FormGroup, Label, Input, Button} from "reactstrap";
+import { Button, Form, Input, Navbar, NavbarBrand, Nav, NavLink, NavItem, NavbarToggler, Collapse} from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faPodcast, faSearch } from "@fortawesome/free-solid-svg-icons";
+import "../App.css";
 
-library.add(faSearch);
+library.add(faPodcast, faSearch, fab);
 
 // Allow the user to get podcast recommendations by inputting keywords.
 export class SearchBar extends Component {
@@ -12,6 +14,16 @@ export class SearchBar extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
   }
 
   handleChange(event) {
@@ -26,24 +38,29 @@ export class SearchBar extends Component {
   render() {
     return (
       <div>
-        <Container style={barStyle}>
-          <Form inline onSubmit={this.handleSubmit}>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-              <Input
-                type="search"
-                name="search"
-                id="searchIt"
-                placeholder="Search by title, keywords..."
-                //size="40"
-                value={this.props.userInput}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <Button style={{ backgroundColor: "#007FFF" }}>
-              <FontAwesomeIcon icon="search" />
-            </Button>
-          </Form>
-        </Container>
+        <Navbar className="navbar navbar-expand-sm navbar-dark bg-dark" style={{marginBottom: "20px"}}>
+          <NavbarBrand href="/"><FontAwesomeIcon icon="podcast" /> podfavs </NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav navbar style={{ width: "100%" }}>
+              <Form inline className="my-2 my-lg-0" onSubmit={this.handleSubmit}>
+                <Input
+                  className="form-control"
+                  type="search"
+                  name="search"
+                  id="searchIt"
+                  placeholder="Find your new favorite podcast by title or keywords"
+                  value={this.props.userInput}
+                  onChange={this.handleChange}
+                />
+                <Button style={{ backgroundColor: "#009FD4" }}><FontAwesomeIcon icon="search" /></Button>
+              </Form>
+            </Nav>
+            <NavLink href="https://github.com/sazhang/podscraper">
+              <FontAwesomeIcon icon={["fab", "github"]} className="fa-lg text-light"/>
+            </NavLink>
+          </Collapse>
+        </Navbar>
       </div>
     );
   }

@@ -21,7 +21,7 @@ FeaturedPodcasts.propTypes = {
 };
 
 const cardDeckStyle = {
-  backgroundColor: "#FED766",
+  //backgroundColor: "#FED766",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-around",
