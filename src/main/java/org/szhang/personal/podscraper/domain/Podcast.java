@@ -31,6 +31,10 @@ public class Podcast extends Entity {
   @Relationship(type = "HOSTS", direction = Relationship.INCOMING)
   private List<Host> hosts; //TODO: stitcher does not provide these
 
+  @JsonIgnoreProperties("podcasts")
+  @Relationship(type = "SAVED", direction = Relationship.INCOMING)
+  private List<User> users;
+
   /**
    * Construct a new podcast with the given characteristics.
    *
@@ -53,6 +57,7 @@ public class Podcast extends Entity {
     this.categories.add(category);
     this.keywords = new ArrayList<>();
     this.keywords.addAll(keywords);
+    this.users = new ArrayList<>();
   }
 
   public Podcast() {
@@ -151,6 +156,14 @@ public class Podcast extends Entity {
 
   public void setHosts(List<Host> hosts) {
     this.hosts = hosts;
+  }
+
+  public List<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(List<User> users) {
+    this.users = users;
   }
 
   @Override

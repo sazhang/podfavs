@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Handle user requests.
+ * Handle requests related to podcasts.
  */
 @RestController
 @RequestMapping("/api")
@@ -23,17 +23,17 @@ public class PodcastController {
     this.podcastService = podcastService;
   }
 
-  @RequestMapping(value = "/", method = RequestMethod.GET)
+  @GetMapping("/")
   public Page<Podcast> findSomePodcasts() {
     return podcastService.findSomePodcasts();
   }
 
-  @RequestMapping(value = "/search/{words}", method = RequestMethod.GET)
+  @GetMapping("/search/{words}")
   public Collection<Podcast> getRecsBasedOnSearch(@PathVariable(value = "words") List<String> words) {
     return podcastService.getRecsBasedOnSearch(words);
   }
 
-  @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+  @GetMapping("/id/{id}")
   public Podcast getPodcastByID(@PathVariable(value = "id") Long id) {
     return podcastService.getPodcastByID(id);
   }
