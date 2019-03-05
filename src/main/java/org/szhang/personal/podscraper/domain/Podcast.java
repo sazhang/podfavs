@@ -39,24 +39,19 @@ public class Podcast extends Entity {
    * Construct a new podcast with the given characteristics.
    *
    * @param name          podcast name
-   * @param category      category this podcast falls under
    * @param descrip       podcast descrip
    * @param rating        rating
    * @param url           link to stitcher profile of the podcast
    * @param imageUrl      link to podcast image
-   * @param keywords      stitcher given keywords
    */
-  public Podcast(String name, Category category, String descrip, Double rating, String url, String imageUrl,
-                 List<Keyword> keywords) {
+  public Podcast(String name, String descrip, Double rating, String url, String imageUrl) {
     this.name = name;
     this.description = descrip;
     this.rating = rating;
     this.url = url;
     this.imageUrl = imageUrl;
     this.categories = new ArrayList<>();
-    this.categories.add(category);
     this.keywords = new ArrayList<>();
-    this.keywords.addAll(keywords);
     this.users = new ArrayList<>();
   }
 

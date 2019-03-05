@@ -1,6 +1,5 @@
 package org.szhang.personal.podscraper.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -9,11 +8,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
-import org.szhang.personal.podscraper.domain.Podcast;
-import org.szhang.personal.podscraper.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,16 +17,12 @@ import java.util.Map;
  * Used by React to 1) find out if a user is authenticated and 2) perform global logout.
  */
 @RestController
-@RequestMapping("/api")
 public class UserController {
 
   private ClientRegistration registration;
-  private final UserService userService;
 
-  @Autowired
-  public UserController(ClientRegistrationRepository registrations, UserService userService) {
+  public UserController(ClientRegistrationRepository registrations) {
     this.registration = registrations.findByRegistrationId("okta");
-    this.userService = userService;
   }
 
   @GetMapping("/user")
@@ -54,10 +46,5 @@ public class UserController {
     logoutDetails.put("idToken", idToken.getTokenValue());
     request.getSession(false).invalidate();
     return ResponseEntity.ok().body(logoutDetails);
-  }
-
-  @GetMapping("/mypodcasts")
-  public Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "id") Long id) {
-    return userService.getMySavedPodcasts(id);
   }
 }

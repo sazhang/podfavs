@@ -15,7 +15,11 @@ public class User extends Entity {
 
   @JsonIgnoreProperties("users")
   @Relationship(type = "SAVED")
-  private List<Podcast> podcasts;
+  private List<Podcast> savedPodcasts;
+
+  @JsonIgnoreProperties("users")
+  @Relationship(type = "RATED")
+  private List<Podcast> ratedPodcasts;
 
   /**
    * Construct a new user with the given characteristics.
@@ -26,7 +30,8 @@ public class User extends Entity {
   public User(String username, String email) {
     this.username = username;
     this.email = email;
-    this.podcasts = new ArrayList<>();
+    this.savedPodcasts = new ArrayList<>();
+    this.ratedPodcasts = new ArrayList<>();
   }
 
   public User() {
@@ -52,11 +57,19 @@ public class User extends Entity {
     this.email = email;
   }
 
-  public List<Podcast> getPodcasts() {
-    return podcasts;
+  public List<Podcast> getSavedPodcasts() {
+    return savedPodcasts;
   }
 
-  public void setPodcasts(List<Podcast> podcasts) {
-    this.podcasts = podcasts;
+  public void setSavedPodcasts(List<Podcast> savedPodcasts) {
+    this.savedPodcasts = savedPodcasts;
+  }
+
+  public List<Podcast> getRatedPodcasts() {
+    return ratedPodcasts;
+  }
+
+  public void setRatedPodcasts(List<Podcast> ratedPodcasts) {
+    this.ratedPodcasts = ratedPodcasts;
   }
 }

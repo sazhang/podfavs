@@ -28,9 +28,9 @@ public class PodcastRepositoryTest {
    */
   @Test
   public void testGetRecsGivenPodcastName() {
-    String name = "NBC Meet the Press";
+    String name = "The Dropout";
     Collection<Podcast> podcasts = podcastRepository.getRecsGivenPodcastName(name);
-    assertEquals(8, podcasts.size());
+    assertEquals(12, podcasts.size());
   }
 
   /**
@@ -38,9 +38,9 @@ public class PodcastRepositoryTest {
    */
   @Test
   public void testGetPodcastsGivenWordsOr() {
-    List<String> keywords = new ArrayList<>(Arrays.asList("political", "tech"));
+    List<String> keywords = new ArrayList<>(Arrays.asList("startup", "money"));
     Collection<Podcast> podcasts = podcastRepository.getPodcastsGivenWordsOr(keywords);
-    assertEquals(11, podcasts.size());
+    assertEquals(3, podcasts.size());
   }
 
   /**
@@ -48,9 +48,9 @@ public class PodcastRepositoryTest {
    */
   @Test
   public void testGetPodcastsGivenWordsAnd() {
-    List<String> keywords = new ArrayList<>(Arrays.asList("political"));
+    List<String> keywords = new ArrayList<>(Arrays.asList("tech"));
     Collection<Podcast> podcasts = podcastRepository.getPodcastsGivenWordsAnd(keywords);
-    assertEquals(4, podcasts.size());
+    assertEquals(6, podcasts.size());
   }
 
   /**
@@ -58,11 +58,11 @@ public class PodcastRepositoryTest {
    */
   @Test
   public void testGetPodcastByName() {
-    String name = "Page Seven";
+    String name = "The Dropout";
     Podcast result = podcastRepository.getPodcastByName(name);
     List<Keyword> keywords = result.getKeywords();
     List<String> words = keywords.stream().map(Keyword::getWord).collect(Collectors.toList());
-    assertEquals(6, words.size());
+    assertEquals(14, words.size());
     List<Category> categories = result.getCategories();
     List<String> cats = categories.stream().map(Category::getCategory).collect(Collectors.toList());
     assertEquals(1, cats.size());
@@ -73,9 +73,9 @@ public class PodcastRepositoryTest {
    */
   @Test
   public void testGetPodcastById() {
-    Podcast result = podcastRepository.getPodcastByID(Long.valueOf(18543));
+    Podcast result = podcastRepository.getPodcastByID(Long.valueOf(18932));
     List<Keyword> keywords = result.getKeywords();
-    assertEquals(5, keywords.size());
+    assertEquals(15, keywords.size());
     List<Category> categories = result.getCategories();
     assertEquals(1, categories.size());
   }
@@ -85,17 +85,17 @@ public class PodcastRepositoryTest {
    */
   @Test
   public void testGetRecsBasedOnSearch() {
-    List<String> words = new ArrayList<>(Arrays.asList("how i built", "tech", "politics"));
+    List<String> words = new ArrayList<>(Arrays.asList("how i built", "politics"));
     Iterable<Map<String,Object>> results = podcastRepository.getRecsBasedOnSearch(words);
     List<Long> ids = new ArrayList<>();
     for (Map<String,Object> map : results) {
       ids.add((Long) map.get("ids"));
     }
-    assertEquals(15, ids.size());
+    assertEquals(5, ids.size());
     Collection<Podcast> podcasts = podcastRepository.getPodcastsByIds(ids);
-    assertEquals(15, podcasts.size());
+    assertEquals(5, podcasts.size());
     Podcast aPodcast = podcasts.iterator().next();
-    assertEquals(13, aPodcast.getKeywords().size());
+    assertEquals(11, aPodcast.getKeywords().size());
     assertEquals(1, aPodcast.getCategories().size());
   }
 }

@@ -21,6 +21,6 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
    * @param id   user id
    * @return podcasts
    */
-  @Query("MATCH pod=(p:Podcast)-[*]->() WHERE ID(p) = {id} RETURN pod, nodes(pod), rels(pod)")
+  @Query("MATCH usr=(u:User)-[:SAVED]->(p:Podcast) WHERE ID(u) = {id} RETURN p")
   Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "id") Long id);
 }

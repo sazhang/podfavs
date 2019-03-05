@@ -1,10 +1,20 @@
 import React, { Component } from "react";
-import styles from "../App.css";
+import { Global, css } from "@emotion/core";
+import styled from "@emotion/styled";
+import tw from "tailwind.macro";
 import FeaturedPodcasts from "./FeaturedPodcasts";
-import { Container, Row} from "reactstrap";
 import SearchBar from "./SearchBar";
+import Footer from "./Footer";
 
 // Landing page with a search bar and default list of podcasts.
+const Main = styled.main`
+  ${tw`flex flex-wrap w-full h-full justify-center bg-indigo-darkest`};
+`;
+
+const Container = styled.div`
+  ${tw`min-h-screen w-full mx-5 max-w-2xl`};
+`;
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -46,31 +56,46 @@ class Home extends Component {
       return <p>Loading...</p>;
     }
     return (
-      <div style={divStyle}>
-        <SearchBar
-          userInput={this.state.userInput}
-          onHandleChange={this.handleChange}
-          onHandleSubmit={this.handleSubmit}
+      <>
+        <Global
+          styles={css`
+            *,
+            *:before,
+            *:after {
+              box-sizing: inherit;
+            }
+            html {
+              text-rendering: optimizeLegibility;
+              box-sizing: border-box;
+              -ms-overflow-style: scrollbar;
+              -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+            html,
+            body {
+              ${tw`p-0 m-0 font-sans bg-indigo-lightest`};
+            }
+            h2 {
+              ${tw`my-4 font-sans text-3xl sm:text-4xl text-indigo-lighter`};
+            }
+          `}
         />
-        <Container>
-          <h2 style={{ textDecoration: "underline #EA638C" }}>
-            {this.state.title}
-          </h2>
-          <Row>
+        <Main>
+          <SearchBar
+            userInput={this.state.userInput}
+            onHandleChange={this.handleChange}
+            onHandleSubmit={this.handleSubmit}
+          />
+          <Container>
+            <h2>{this.state.title}</h2>
             <FeaturedPodcasts podcastList={this.state.podcastList} />
-          </Row>
-        </Container>
-      </div>
+          </Container>
+          <Footer />
+        </Main>
+      </>
     );
   }
 }
-
-const divStyle = {
-  //backgroundColor: "#B8D5B8",
-  color: "#2B303A",
-  fontFamily: "houschka-rounded, sans-serif",
-  maxWidth: "100%",
-  maxHeight: "100%"
-};
 
 export default Home;

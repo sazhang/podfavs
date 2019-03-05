@@ -1,33 +1,28 @@
 import React, { Component } from "react";
-import { CardDeck } from "reactstrap";
-import PodcastItem from "./PodcastItem";
 import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import tw from "tailwind.macro";
+import PodcastItem from "./PodcastItem";
 
 //Render a list of podcasts.
+const CardDeck = styled.div`
+  ${tw`flex flex-wrap -mx-2`};
+`;
+
 class FeaturedPodcasts extends Component {
-  
   render() {
+    const cards = [];
+    this.props.podcastList.map(podcast =>
+      cards.push(<PodcastItem key={podcast.id} podcast={podcast} />)
+    );
+
     // populate the table with podcast components
-    return this.props.podcastList.map(podcast => (
-      <CardDeck style={cardDeckStyle}>
-        <PodcastItem key={podcast.id} podcast={podcast} />
-      </CardDeck>
-    ));
+    return <CardDeck>{cards}</CardDeck>;
   }
 }
 
 FeaturedPodcasts.propTypes = {
   podcastList: PropTypes.array.isRequired
-};
-
-const cardDeckStyle = {
-  //backgroundColor: "#FED766",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-around",
-  flex: "auto",
-  flexFlow: "row wrap",
-  margin: "0 auto"
 };
 
 export default FeaturedPodcasts;

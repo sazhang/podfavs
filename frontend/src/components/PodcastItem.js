@@ -1,9 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, CardImg, CardImgOverlay, CardTitle, CardText } from "reactstrap";
-import "../App.css";
+import styled from "@emotion/styled";
+import tw from "tailwind.macro";
 
 // A card that provides information about a podcast.
+const Card = styled.div`
+  ${tw`w-1/2 sm:w-1/5 p-2`};
+`;
+
+const Info = styled.div`
+  ${tw`px-6 py-4`};
+`;
+
+const Descrip = styled.p`
+  ${tw`text-grey-darker text-base`};
+`;
+
+const Title = styled.div`
+  ${tw`font-bold text-xl mb-2`};
+`;
+
 export class PodcastItem extends Component {
   constructor(props) {
     super(props);
@@ -28,41 +44,18 @@ export class PodcastItem extends Component {
     const aPodcast = this.props.podcast;
 
     return (
-      <div>
-        <Card inverse 
-        style={cardStyle} 
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}>
-          <CardImg src={aPodcast.imageUrl} style={{backgroundColor: 'transparent'}} alt="Card image cap"/>
-          <CardImgOverlay style={{ backgroundColor: "#01172F", opacity: this.state.opacity }}>
-            <CardTitle style={{ fontSize: "1.1em", color: "#C9E4E7", opacity: this.state.opacity }}>{aPodcast.name}</CardTitle>
-            <CardText><a href={aPodcast.url} style={linkStyle}>Learn more</a></CardText>
-          </CardImgOverlay>
-        </Card>
-        <br/>
-      </div>
+      <Card>
+        <img
+          src={aPodcast.imageUrl}
+          alt="podcast cover"
+        />
+      </Card>
     );
   }
 }
 
 PodcastItem.propTypes = {
   podcast: PropTypes.object.isRequired
-};
-
-const linkStyle = {
-  position: 'absolute',
-  top: '150px',
-  left: '100px'
-  /* 
-  <CardTitle>{aPodcast.name}</CardTitle>
-  <CardText>{aPodcast.description}</CardText>
-  <CardText>{aPodcast.rating} out of 5</CardText> </CardImgOverlay>*/
-}
-
-const cardStyle = {
-  width: "200px",
-  height: "200px",
-  margin: "0 auto"
 };
 
 export default PodcastItem;

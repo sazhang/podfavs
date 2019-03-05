@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.szhang.personal.podscraper.domain.Podcast;
 import org.szhang.personal.podscraper.services.PodcastService;
+import org.szhang.personal.podscraper.services.UserService;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,10 +18,12 @@ import java.util.List;
 public class PodcastController {
 
   private final PodcastService podcastService;
+  private final UserService userService;
 
   @Autowired
-  public PodcastController(PodcastService podcastService) {
+  public PodcastController(PodcastService podcastService, UserService userService) {
     this.podcastService = podcastService;
+    this.userService = userService;
   }
 
   @GetMapping("/")
@@ -36,6 +39,11 @@ public class PodcastController {
   @GetMapping("/id/{id}")
   public Podcast getPodcastByID(@PathVariable(value = "id") Long id) {
     return podcastService.getPodcastByID(id);
+  }
+
+  @GetMapping("/mypodcasts")
+  public Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "id") Long id) {
+    return userService.getMySavedPodcasts(id);
   }
 
   /*@RequestMapping(value = "/rec/{name}", method = RequestMethod.GET)

@@ -30,6 +30,7 @@ public class DatabaseLoader implements CommandLineRunner {
   private Map<String, Keyword> keywords;
   private Map<String, List<String>> podcastsByCategory;
   private Map<String, Podcast> allPodcasts;
+  private Map<String, String> podcastToKeywords;
   private WebDriver driver;
   private WebDriverWait wait;
 
@@ -51,8 +52,10 @@ public class DatabaseLoader implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     setUp();
-    session = sessionFactory.openSession();
     getPodcastsByCategory();
+
+    session = sessionFactory.openSession();
+    session.purgeDatabase();
     getEachPodcastDetails();
   }
 
@@ -63,14 +66,13 @@ public class DatabaseLoader implements CommandLineRunner {
     keywords = new HashMap<>();
     podcastsByCategory = new HashMap<>();
     allPodcasts = new HashMap<>();
+    podcastToKeywords = new HashMap<>();
     File file = new File("C:/Users/Sarah Zhang/chromedriver.exe");
     System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
     driver = new ChromeDriver();
     wait = new WebDriverWait(driver, 10);
 
-    session = sessionFactory.openSession();
-    session.purgeDatabase();
-    transaction = session.beginTransaction();
+    //transaction = session.beginTransaction();
   }
 
   /**
@@ -85,14 +87,19 @@ public class DatabaseLoader implements CommandLineRunner {
     for (String category : categories) {
       driver.get(category);
       try {
-        String categoryName = driver.findElement(By.id("view-title")).getText();
-        //Category aCategory = new Category(categoryName);
-        List<WebElement> showDetails = wait.until(
-            ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[@class='sl-showName']/*")));
-        List<String> podcastLinks = new ArrayList<>();
-        for (WebElement show : showDetails) {
-          podcastLinks.add(show.getAttribute("href"));
-        }
+          String categoryName = driver.findElement(By.id("view-title")).getText();
+          List<WebElement> showDetails = wait.until(
+              ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[@class='sl-showName']/*")));
+          // get top 20 podcasts in each category
+          int n = 0;
+          List<String> podcastLinks = new ArrayList<>();
+          for (WebElement show : showDetails) {
+            if (n == 10) {
+              break;
+            }
+            podcastLinks.add(show.getAttribute("href"));
+            n++;
+          }
         podcastsByCategory.put(categoryName, podcastLinks);
       } catch (Exception te) {
         // some categories do not have top 50 lists so just continue
@@ -104,10 +111,9 @@ public class DatabaseLoader implements CommandLineRunner {
   /**
    * By category, go to each podcast profile and get the show's info.
    */
-  private void getEachPodcastDetails() { //TODO: pretty slow
+  private void getEachPodcastDetails() {
     for (Map.Entry<String, List<String>> entry : podcastsByCategory.entrySet()) {
       Category aCategory = new Category(entry.getKey());
-      List<Podcast> relatedPodcasts = new ArrayList<>();
       // loop through the current category's list of podcasts
       for (String podcastUrl : entry.getValue()) {
         driver.get(podcastUrl);
@@ -115,7 +121,6 @@ public class DatabaseLoader implements CommandLineRunner {
         double rating;
         String image;
         String kwString;
-        List<Keyword> keywordList;
         String description;
         try {
           title = wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -123,7 +128,6 @@ public class DatabaseLoader implements CommandLineRunner {
           // if we already created this podcast, then add the current category to it
           if (allPodcasts.containsKey(title)) {
             allPodcasts.get(title).addACategory(aCategory);
-            session.save(allPodcasts.get(title));
             continue;
           }
 
@@ -137,22 +141,32 @@ public class DatabaseLoader implements CommandLineRunner {
           // get keywords and description
           kwString = wait.until(ExpectedConditions.presenceOfElementLocated(
               By.xpath("//meta[@name='keywords']"))).getAttribute("content");
+          podcastToKeywords.put(title, kwString);
           description = wait.until(ExpectedConditions.presenceOfElementLocated(
               By.xpath("//p[@id='feed-description-full']"))).getText();
-          keywordList = generateKeywords(kwString); //TODO: not ideal...although keywords list size is much smaller
         } catch (Exception e) {
           //unable to grab an attribute so skip
           continue;
         }
-        Podcast aPodcast = new Podcast(title, aCategory, description, rating, podcastUrl, image, keywordList);
-        relatedPodcasts.add(aPodcast); // need to link category w/ list of podcasts
-        session.save(aPodcast);
+        Podcast aPodcast = new Podcast(title, description, rating, podcastUrl, image);
+        aPodcast.addACategory(aCategory);
+        allPodcasts.put(title, aPodcast);
       }
-      aCategory.setPodcasts(relatedPodcasts);
-      session.save(aCategory);
     }
+
+    // associate keywords with podcasts
+    for (Map.Entry<String, String> entry : podcastToKeywords.entrySet()) {
+      List<Keyword> keywords = generateKeywords(entry.getValue());
+      String currentPodcast = entry.getKey();
+      allPodcasts.get(currentPodcast).setKeywords(keywords);
+    }
+
+    List<Podcast> completePodcasts = new ArrayList<>(allPodcasts.values());
+    session.save(completePodcasts);
+
     // according to docs, longer session = more efficient requests to db but memory intensive
-    transaction.commit();
+    //transaction.commit();
+    session.clear();
     driver.close();
   }
 
