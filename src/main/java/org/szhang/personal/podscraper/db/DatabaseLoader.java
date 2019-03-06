@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.szhang.personal.podscraper.domain.Category;
 import org.szhang.personal.podscraper.domain.Keyword;
 import org.szhang.personal.podscraper.domain.Podcast;
+import org.szhang.personal.podscraper.domain.User;
 
 import java.io.File;
 import java.util.*;
@@ -36,7 +37,6 @@ public class DatabaseLoader implements CommandLineRunner {
 
   private final SessionFactory sessionFactory;
   private Session session;
-  private Transaction transaction;
 
   /**
    * Construct a database loader.
@@ -55,8 +55,12 @@ public class DatabaseLoader implements CommandLineRunner {
     getPodcastsByCategory();
 
     session = sessionFactory.openSession();
-    session.purgeDatabase();
+    //session.purgeDatabase();
     getEachPodcastDetails();
+    addTwoTestUsers();
+
+    // according to docs, longer session = more efficient requests to db but memory intensive
+    driver.close();
   }
 
   /**
@@ -71,8 +75,6 @@ public class DatabaseLoader implements CommandLineRunner {
     System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
     driver = new ChromeDriver();
     wait = new WebDriverWait(driver, 10);
-
-    //transaction = session.beginTransaction();
   }
 
   /**
@@ -163,11 +165,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
     List<Podcast> completePodcasts = new ArrayList<>(allPodcasts.values());
     session.save(completePodcasts);
-
-    // according to docs, longer session = more efficient requests to db but memory intensive
-    //transaction.commit();
     session.clear();
-    driver.close();
   }
 
   /**
@@ -191,6 +189,17 @@ public class DatabaseLoader implements CommandLineRunner {
       }
     }
     return keywordList;
+  }
+
+  /**
+   * Add two users to the database for test use.
+   */
+  private void addTwoTestUsers() {
+    User michael = new User("michaelscott", "michael@dunder.mifflin", "peoplepapercompany");
+    User dwight = new User("dwightschrute", "dwight@schrute.farms", "beets4lifejim");
+    List<User> testUsers = new ArrayList<>(Arrays.asList(michael, dwight));
+    session.save(testUsers);
+    session.clear();
   }
 
   /**

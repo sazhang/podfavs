@@ -6,7 +6,7 @@ import PodcastItem from "./PodcastItem";
 
 //Render a list of podcasts.
 const CardDeck = styled.div`
-  ${tw`flex flex-wrap -mx-2`};
+  ${tw`flex flex-wrap mb-8 -mx-2`};
 `;
 
 class FeaturedPodcasts extends Component {

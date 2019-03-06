@@ -5,10 +5,10 @@ import tw from "tailwind.macro";
 
 // A card that provides information about a podcast.
 const Card = styled.div`
-  ${tw`w-1/2 sm:w-1/5 p-2`};
+  ${tw`w-1/2 sm:w-1/4 md:w-1/5 p-2`};
 `;
 
-const Info = styled.div`
+/* const Info = styled.div`
   ${tw`px-6 py-4`};
 `;
 
@@ -18,7 +18,7 @@ const Descrip = styled.p`
 
 const Title = styled.div`
   ${tw`font-bold text-xl mb-2`};
-`;
+`; */
 
 export class PodcastItem extends Component {
   constructor(props) {

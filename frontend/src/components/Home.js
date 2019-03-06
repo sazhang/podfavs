@@ -1,27 +1,18 @@
 import React, { Component } from "react";
-import { Global, css } from "@emotion/core";
-import styled from "@emotion/styled";
-import tw from "tailwind.macro";
+import { Container, Wrapper, HalfDiv } from "./styles/globalstyles";
+import wrapLayout from "./Layout";
 import FeaturedPodcasts from "./FeaturedPodcasts";
 import SearchBar from "./SearchBar";
-import Footer from "./Footer";
+import { ReactComponent as HomeSvg } from "./images/home.svg";
 
 // Landing page with a search bar and default list of podcasts.
-const Main = styled.main`
-  ${tw`flex flex-wrap w-full h-full justify-center bg-indigo-darkest`};
-`;
-
-const Container = styled.div`
-  ${tw`min-h-screen w-full mx-5 max-w-2xl`};
-`;
-
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       podcastList: [],
       userInput: "",
-      title: "Featured podcasts",
+      title: "Featured",
       isLoading: true
     };
     this.handleChange = this.handleChange.bind(this);
@@ -57,45 +48,28 @@ class Home extends Component {
     }
     return (
       <>
-        <Global
-          styles={css`
-            *,
-            *:before,
-            *:after {
-              box-sizing: inherit;
-            }
-            html {
-              text-rendering: optimizeLegibility;
-              box-sizing: border-box;
-              -ms-overflow-style: scrollbar;
-              -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-              -webkit-font-smoothing: antialiased;
-              -moz-osx-font-smoothing: grayscale;
-            }
-            html,
-            body {
-              ${tw`p-0 m-0 font-sans bg-indigo-lightest`};
-            }
-            h2 {
-              ${tw`my-4 font-sans text-3xl sm:text-4xl text-indigo-lighter`};
-            }
-          `}
+        <SearchBar
+          userInput={this.state.userInput}
+          onHandleChange={this.handleChange}
+          onHandleSubmit={this.handleSubmit}
         />
-        <Main>
-          <SearchBar
-            userInput={this.state.userInput}
-            onHandleChange={this.handleChange}
-            onHandleSubmit={this.handleSubmit}
-          />
-          <Container>
-            <h2>{this.state.title}</h2>
-            <FeaturedPodcasts podcastList={this.state.podcastList} />
-          </Container>
-          <Footer />
-        </Main>
+        <Container>
+          <Wrapper className="items-center">
+            <HalfDiv>
+              <h1>
+                Find your next favorite podcast.
+              </h1>
+            </HalfDiv>
+            <HalfDiv>
+              <HomeSvg className="w-full h-full" />
+            </HalfDiv>
+          </Wrapper>
+          <h3>{this.state.title}</h3>
+          <FeaturedPodcasts podcastList={this.state.podcastList} />
+        </Container>
       </>
     );
   }
 }
 
-export default Home;
+export default wrapLayout(Home);

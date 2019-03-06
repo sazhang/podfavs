@@ -24,7 +24,7 @@ View the full documentation at https://tailwindcss.com.
 |
 */
 
-let defaultConfig = require('tailwindcss/defaultConfig')()
+//let defaultConfig = require('tailwindcss/defaultConfig')()
 
 
 /*
@@ -261,6 +261,7 @@ module.exports = {
     '3xl': '1.875rem',  // 30px
     '4xl': '2.25rem',   // 36px
     '5xl': '3rem',      // 48px
+    'xxl': '4rem',
   },
 
 
