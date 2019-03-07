@@ -5,6 +5,9 @@ import tw from "tailwind.macro";
 //Render a list of podcasts.
 const FooterDiv = styled.footer`
   ${tw`flex w-full h-16 justify-center items-center bg-indigo-darker text-indigo-lighter shadow`};
+  a {
+    ${tw`text-indigo-lighter hover:text-indigo`};
+  }
 `;
 
 const Footer = () => (

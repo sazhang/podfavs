@@ -44,6 +44,9 @@ View the full documentation at https://tailwindcss.com.
 */
 
 let colors = {
+  'undraw-purple': '#6c63ff',
+  'vivid-pink': '#F7233C',
+  
   'transparent': 'transparent',
 
   'black': '#22292f',

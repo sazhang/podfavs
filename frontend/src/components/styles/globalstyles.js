@@ -1,29 +1,30 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 import tw from "tailwind.macro";
 
 // Global styles
 export const Container = styled.div`
-  ${tw`h-full w-full max-w-2xl m-8`};
+  ${tw`h-full w-full max-w-2xl m-5 sm:m-8`};
 `;
 
 export const Wrapper = styled.div`
-  ${tw`flex flex-wrap my-10 justify-center -mx-2`};
+  ${tw`flex flex-wrap justify-center items-center`};
 `;
 
 export const HalfDiv = styled.div`
-  ${tw`w-full h-full sm:w-1/2 px-2`};
+  ${tw`w-full h-full sm:w-1/2`};
 `;
 
-export const Button = styled.button`
+export const IconBtn = styled.button`
   ${tw`border-none text-indigo-lighter hover:text-indigo rounded leading-tight focus:outline-none`};
 `;
 
 export const FormStyle = styled.form`
-  ${tw`bg-indigo-lightest text-lg text-indigo-darker shadow-md rounded px-8 pt-6 pb-8 mb-6`};
+  ${tw`bg-indigo-lightest text-xl text-indigo-darker shadow-md rounded px-8 pt-6 pb-8`};
 `;
 
 export const FormWrapper = styled.div`
-  ${tw`flex-1 max-w-xs mx-auto`};
+  ${tw`flex-1 max-w-xs`};
 `;
 
 export const FormLabel = styled.label`
@@ -31,9 +32,27 @@ export const FormLabel = styled.label`
 `;
 
 export const FormInput = styled.input`
-  ${tw`border focus:border-indigo rounded w-full py-2 px-3 mb-3 shadow appearance-none`};
+  ${tw`focus:outline-none focus:shadow-outline focus:shadow-indigo rounded w-full py-2 px-3 mb-3 shadow-md appearance-none`};
 `;
 
-export const FormBtn = styled.button`
-  ${tw`bg-indigo-dark hover:bg-transparent text-indigo-lightest hover:text-indigo-dark hover:border hover:border-indigo font-semibold mt-3 py-2 px-4 rounded shadow`};
+const btnStyle = css`
+  ${tw`font-semibold py-2 px-4 rounded shadow text-white inline-block mt-4 md:mt-0`};
+  transition: 0.5s;
+  background-size: 200% auto;
+  &:hover {
+    background-position: right center;
+  }
+  a {
+    ${tw`text-white no-underline`};
+  }
+`;
+
+export const GradientBtn = styled.button`
+  ${btnStyle}
+  background-image: linear-gradient(to right, #B24592 0%, #F15F79 51%, #B24592 100%);
+`;
+
+export const GradientBtnTwo = styled.button`
+  ${btnStyle}
+  background-image: linear-gradient(to right, #F15F79 0%, #B24592 51%, #F15F79 100%);
 `;

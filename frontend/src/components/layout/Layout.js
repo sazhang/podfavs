@@ -33,20 +33,14 @@ const wrapLayout = WrappedComponent => {
               body {
                 ${tw`p-0 m-0 font-sans bg-indigo-darkest`};
               }
-              h1, h2, h3 {
+              h1, h3 {
                 ${tw`my-4 font-sans`};
               }
               h1 {
-                ${tw`text-5xl lg:text-xxl text-indigo-lightest`};
-              }
-              h2 {
-                ${tw`text-3xl sm:text-4xl text-indigo-lighter`};
+                ${tw`text-3xl sm:text-4xl sm:text-5xl lg:text-xxl text-indigo-lightest`};
               }
               h3 {
-                ${tw`text-3xl text-indigo-lighter`};
-              }
-              a {
-                ${tw`text-indigo-lighter hover:text-indigo`};
+                ${tw`text-2xl sm:text-3xl text-indigo-lighter`};
               }
             `}
           />

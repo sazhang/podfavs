@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './components/pages/Home';
 import LoginPage from "./components/auth/LoginPage"
+import RegisterPage from "./components/auth/RegisterPage"
 
 // Route renders UI when app location matches the path
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
         <Switch>
           <Route path='/' exact={true} component={Home}/>
           <Route path='/login' exact={true} component={LoginPage}/>
+          <Route path='/register' exact={true} component={RegisterPage}/>
         </Switch>
       </Router>
     )

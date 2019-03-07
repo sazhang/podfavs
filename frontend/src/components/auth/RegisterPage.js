@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import wrapLayout from "../layout/Layout";
-import { Container, Wrapper, IconBtn, HalfDiv } from "../styles/globalstyles";
-import LoginForm from "./LoginForm";
+import { Container, Wrapper, HalfDiv, IconBtn } from "../styles/globalstyles";
+import RegisterForm from "./RegisterForm";
 import { ReactComponent as LoginSvg } from "../images/login.svg";
 import { ReactComponent as BackIcon } from "../images/arrow-left.svg";
 
-// Let user log into their account
-class LoginPage extends Component {
+// Let user register for an account
+class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,11 +36,11 @@ class LoginPage extends Component {
         </IconBtn>
         <Wrapper>
           <div className="sm:w-1/2 px-3">
-            <h1>Check out new podcasts</h1>
+            <h1>Discover &amp; save podcasts</h1>
             <LoginSvg className="w-full h-full" />
           </div>
           <div className="my-6 sm:my-0 px-3">
-            <LoginForm />
+            <RegisterForm />
           </div>
         </Wrapper>
       </Container>
@@ -48,4 +48,4 @@ class LoginPage extends Component {
   }
 }
 
-export default wrapLayout(LoginPage);
+export default wrapLayout(RegisterPage);

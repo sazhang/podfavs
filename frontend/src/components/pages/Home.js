@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Container, Wrapper, HalfDiv } from "./styles/globalstyles";
-import wrapLayout from "./Layout";
-import FeaturedPodcasts from "./FeaturedPodcasts";
-import SearchBar from "./SearchBar";
-import { ReactComponent as HomeSvg } from "./images/home.svg";
+import { Container, Wrapper, HalfDiv } from "../styles/globalstyles";
+import wrapLayout from "../layout/Layout";
+import FeaturedPodcasts from "../layout/FeaturedPodcasts";
+import SearchBar from "../layout/SearchBar";
+import { ReactComponent as WalkSvg } from "../images/walk.svg";
 
 // Landing page with a search bar and default list of podcasts.
 class Home extends Component {
@@ -13,14 +13,12 @@ class Home extends Component {
       podcastList: [],
       userInput: "",
       title: "Featured",
-      isLoading: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
     fetch("api/")
       .then(response => response.json())
       .then(data =>
@@ -43,9 +41,6 @@ class Home extends Component {
   }
 
   render() {
-    if (this.state.isLoading) {
-      return <p>Loading...</p>;
-    }
     return (
       <>
         <SearchBar
@@ -54,14 +49,14 @@ class Home extends Component {
           onHandleSubmit={this.handleSubmit}
         />
         <Container>
-          <Wrapper className="items-center">
+          <Wrapper>
             <HalfDiv>
               <h1>
-                Find your next favorite podcast.
+                Find your next favorite podcasts
               </h1>
             </HalfDiv>
             <HalfDiv>
-              <HomeSvg className="w-full h-full" />
+              <WalkSvg className="w-full h-full" />
             </HalfDiv>
           </Wrapper>
           <h3>{this.state.title}</h3>

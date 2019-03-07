@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormStyle, FormWrapper, FormInput, FormLabel, FormBtn } from "../styles/globalstyles"
+import { FormStyle, FormWrapper, FormInput, FormLabel, GradientBtn } from "../styles/globalstyles"
 
 // Let user register for an account
 class RegistrationForm extends Component {
@@ -37,7 +37,7 @@ class RegistrationForm extends Component {
   render() {
     return (
       <FormWrapper>
-        <h3>Create Account</h3>
+        <h3 className="text-center">Create Account</h3>
         <FormStyle onSubmit={this.handleSubmit}>
           <div>
             <FormLabel htmlFor="email">Email</FormLabel>
@@ -63,7 +63,7 @@ class RegistrationForm extends Component {
               onChange={this.handlePasswordChange}
             />
           </div>
-          <FormBtn type="button">Sign up</FormBtn>
+          <GradientBtn className="mt-3" type="button">Sign up</GradientBtn>
         </FormStyle>
       </FormWrapper>
     );
