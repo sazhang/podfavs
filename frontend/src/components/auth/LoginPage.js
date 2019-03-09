@@ -11,7 +11,7 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      backToHome: false
+      backToHome: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }

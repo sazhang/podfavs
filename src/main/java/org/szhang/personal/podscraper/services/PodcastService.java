@@ -25,9 +25,8 @@ public class PodcastService {
   }
 
   @Transactional(readOnly = true)
-  public Page<Podcast> findSomePodcasts() {
-    Pageable pageable = PageRequest.of(0, 15);
-    return podcastRepository.findAll(pageable, 0);
+  public Collection<Podcast> getFeaturedPodcasts() {
+    return podcastRepository.getFeaturedPodcasts();
   }
 
   @Transactional(readOnly = true)
@@ -44,24 +43,4 @@ public class PodcastService {
   public Podcast getPodcastByID(Long id) {
     return podcastRepository.getPodcastByID(id);
   }
-
-  /*@Transactional(readOnly = true)
-  public Collection<Podcast> getRecsGivenPodcastName(String name) {
-    return podcastRepository.getRecsGivenPodcastName(name);
-  }
-
-  @Transactional(readOnly = true)
-  public Collection<Podcast> getPodcastsGivenWordsOr(List<String> keywords) {
-    return podcastRepository.getPodcastsGivenWordsOr(keywords);
-  }
-
-  @Transactional(readOnly = true)
-  public Collection<Podcast> getPodcastsGivenWordsAnd(List<String> keywords) {
-    return podcastRepository.getPodcastsGivenWordsAnd(keywords);
-  }
-
-  @Transactional(readOnly = true)
-  public Podcast getPodcastByName(String name) {
-    return podcastRepository.getPodcastByName(name);
-  }*/
 }

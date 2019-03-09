@@ -9,6 +9,7 @@ import org.szhang.personal.podscraper.services.UserService;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Handle requests related to podcasts.
@@ -26,9 +27,9 @@ public class PodcastController {
     this.userService = userService;
   }
 
-  @GetMapping("/")
-  public Page<Podcast> findSomePodcasts() {
-    return podcastService.findSomePodcasts();
+  @GetMapping("/featured")
+  public Collection<Podcast> getFeaturedPodcasts() {
+    return podcastService.getFeaturedPodcasts();
   }
 
   @GetMapping("/search/{words}")
@@ -46,23 +47,23 @@ public class PodcastController {
     return userService.getMySavedPodcasts(id);
   }
 
-  /*@RequestMapping(value = "/rec/{name}", method = RequestMethod.GET)
-  public Collection<Podcast> getRecsGivenPodcastName(@PathVariable(value = "name") String name) {
-    return podcastService.getRecsGivenPodcastName(name);
+  @PostMapping("/save/podcast/{podId}/user{userId}")
+  public void saveAPodcast(Long podId, Long userId) {
+    userService.saveAPodcast(podId, userId);
   }
 
-  @RequestMapping(value = "/or/{keywords}", method = RequestMethod.GET)
-  public Collection<Podcast> getPodcastsGivenWordsOr(@PathVariable(value = "keywords") List<String> keywords) {
-    return podcastService.getPodcastsGivenWordsOr(keywords);
+  @DeleteMapping("/unsave/podcast/{podId}/user{userId}")
+  public void unsaveAPodcast(Long podId, Long userId) {
+    userService.unsaveAPodcast(podId, userId);
   }
 
-  @RequestMapping(value = "/and/{keywords}", method = RequestMethod.GET)
-  public Collection<Podcast> getPodcastsGivenWordsAnd(@PathVariable(value = "keywords") List<String> keywords) {
-    return podcastService.getPodcastsGivenWordsAnd(keywords);
+  @PostMapping("/savelist")
+  public void saveAllPodcasts(List<Long> podIds, Long userId) {
+    userService.saveAllPodcasts(podIds, userId);
   }
 
-  @RequestMapping(value = "/info/{name}", method = RequestMethod.GET)
-  public Podcast getPodcastByName(@PathVariable(value = "name") String name) {
-    return podcastService.getPodcastByName(name);
-  }*/
+  @DeleteMapping("/unsavelist")
+  public void unsaveAllPodcasts(List<Long> podIds, Long userId) {
+    userService.unsaveAllPodcasts(podIds, userId);
+  }
 }

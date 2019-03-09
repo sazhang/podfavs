@@ -14,7 +14,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+/**
+ * Test methods PodcastController class.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
@@ -26,66 +30,15 @@ public class PodcastAppTest {
   @Autowired
   private UserRepository userRepository;
 
-  /**
-   * Test the getRecsGivenPodcastName method in {@PodcastRepository}
-   */
-  @Test
-  public void testGetRecsGivenPodcastName() {
-    String name = "The Dropout";
-    Collection<Podcast> podcasts = podcastRepository.getRecsGivenPodcastName(name);
-    assertEquals(12, podcasts.size());
-  }
-
-  /**
-   * Test the getPodcastsGivenWordsOr method in {@PodcastRepository}
-   */
-  @Test
-  public void testGetPodcastsGivenWordsOr() {
-    List<String> keywords = new ArrayList<>(Arrays.asList("startup", "money"));
-    Collection<Podcast> podcasts = podcastRepository.getPodcastsGivenWordsOr(keywords);
-    assertEquals(3, podcasts.size());
-  }
-
-  /**
-   * Test the getPodcastsGivenWordsAnd method in {@PodcastRepository}
-   */
-  @Test
-  public void testGetPodcastsGivenWordsAnd() {
-    List<String> keywords = new ArrayList<>(Arrays.asList("tech"));
-    Collection<Podcast> podcasts = podcastRepository.getPodcastsGivenWordsAnd(keywords);
-    assertEquals(6, podcasts.size());
-  }
-
-  /**
-   * Test the getPodcastByName method in {@PodcastRepository}
-   */
-  @Test
-  public void testGetPodcastByName() {
-    String name = "The Dropout";
-    Podcast result = podcastRepository.getPodcastByName(name);
-    List<Keyword> keywords = result.getKeywords();
-    List<String> words = keywords.stream().map(Keyword::getWord).collect(Collectors.toList());
-    assertEquals(14, words.size());
-    List<Category> categories = result.getCategories();
-    List<String> cats = categories.stream().map(Category::getCategory).collect(Collectors.toList());
-    assertEquals(1, cats.size());
-  }
-
-  /**
-   * Test the getPodcastById method in {@PodcastRepository}
-   */
   @Test
   public void testGetPodcastById() {
-    Podcast result = podcastRepository.getPodcastByID(Long.valueOf(18932));
+    Podcast result = podcastRepository.getPodcastByID(18932L);
     List<Keyword> keywords = result.getKeywords();
     assertEquals(15, keywords.size());
     List<Category> categories = result.getCategories();
     assertEquals(1, categories.size());
   }
 
-  /**
-   * Test both getRecsBasedOnSearch and getPodcastsByIds methods in {@PodcastRepository}
-   */
   @Test
   public void testGetRecsBasedOnSearch() {
     List<String> words = new ArrayList<>(Arrays.asList("how i built", "politics"));
@@ -104,7 +57,45 @@ public class PodcastAppTest {
 
   @Test
   public void testGetMySavedPodcasts() {
-    Collection<Podcast> savedPodcasts = userRepository.getMySavedPodcasts(Long.valueOf(18645));
+    Collection<Podcast> savedPodcasts = userRepository.getMySavedPodcasts(18645L);
     assertEquals(1, savedPodcasts.size());
+  }
+
+  @Test
+  public void testGetFeaturedPodcasts() {
+    Collection<Podcast> savedPodcasts = podcastRepository.getFeaturedPodcasts();
+    assertEquals(6, savedPodcasts.size());
+    Podcast aPodcast = savedPodcasts.iterator().next();
+    assertTrue(aPodcast.getKeywords().size() > 0);
+    assertEquals(1, aPodcast.getCategories().size());
+  }
+
+  @Test
+  public void testSaveThenUnsavePodcast() {
+    long michaelId = 19054L;
+    long podcastId = 18837L;
+    // save a podcast
+    assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
+    userRepository.saveAPodcast(podcastId, michaelId);
+    assertEquals(3, userRepository.getMySavedPodcasts(michaelId).size());
+    // thanks to neo4j's MERGE call, there is only one relationship between michael and the podcast
+    userRepository.saveAPodcast(podcastId, michaelId);
+    assertEquals(3, userRepository.getMySavedPodcasts(michaelId).size());
+    // unsave a podcast
+    userRepository.unsaveAPodcast(podcastId, michaelId);
+    assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
+  }
+
+  @Test
+  public void testSaveThenUnsaveManyPodcasts() {
+    long michaelId = 19054L;
+    List<Long> podcastIds = new ArrayList<>(Arrays.asList(18837L, 18861L));
+    // save podcasts
+    assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
+    userRepository.saveAllPodcasts(podcastIds, michaelId);
+    assertEquals(4, userRepository.getMySavedPodcasts(michaelId).size());
+    // unsave podcasts
+    userRepository.unsaveAllPodcasts(podcastIds, michaelId);
+    assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
   }
 }

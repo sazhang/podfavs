@@ -1,28 +1,42 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import tw from "tailwind.macro";
-import PodcastItem from "./PodcastItem";
+import PodcastCard from "../layout/PodcastCard";
 
-//Render a list of podcasts.
+//Render a list of podcasts
 const CardDeck = styled.div`
-  ${tw`flex flex-wrap mb-8 -mx-2`};
+  ${tw`flex flex-wrap -m-3 h-full justify-center`};
 `;
 
 class FeaturedPodcasts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      featured: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("api/featured")
+      .then(response => response.json())
+      .then(data => this.setState({ featured: data }))
+      .catch(err => console.error("Caught error: ", err));
+  }
+
   render() {
     const cards = [];
-    this.props.podcastList.map(podcast =>
-      cards.push(<PodcastItem key={podcast.id} podcast={podcast} />)
+    this.state.featured.map(podcast =>
+      cards.push(<PodcastCard key={podcast.id} podcast={podcast} />)
     );
 
-    // populate the table with podcast components
-    return <CardDeck>{cards}</CardDeck>;
+    // populate the table with podcasts
+    return (
+      <>
+        <h3>Featured</h3>
+        <CardDeck>{cards}</CardDeck>
+      </>
+    );
   }
 }
-
-FeaturedPodcasts.propTypes = {
-  podcastList: PropTypes.array.isRequired
-};
 
 export default FeaturedPodcasts;

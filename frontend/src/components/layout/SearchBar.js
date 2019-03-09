@@ -33,7 +33,6 @@ export class SearchBar extends Component {
     super(props);
     this.state = {
       toHome: false,
-      toLoginPage: false,
       isMenuOpen: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -51,12 +50,8 @@ export class SearchBar extends Component {
     this.props.onHandleSubmit();
   }
 
-  handleClickHome(id) {
-    if (id === 0) {
-      this.setState({ toHome: true });
-    } else {
-      this.setState({ toLoginPage: true });
-    }
+  handleClickHome() {
+    this.setState({ toHome: true });
   }
 
   handleClickMenu() {
@@ -68,18 +63,10 @@ export class SearchBar extends Component {
       return <Redirect to="/" />;
     }
 
-    if (this.state.toLoginPage === true) {
-      return <Redirect to="/login" />;
-    }
-
     return (
       <Nav>
         <div>
-          <IconBtn
-            onClick={() => {
-              this.handleClickHome(0);
-            }}
-          >
+          <IconBtn onClick={this.handleClickHome}>
             <HomeIcon>
               <title>home</title>
             </HomeIcon>
@@ -111,7 +98,7 @@ export class SearchBar extends Component {
             </MenuIcon>
           </IconBtn>
         </div>
-        <BtnDiv className={(this.state.isMenuOpen ? 'block' : 'hidden')}>
+        <BtnDiv className={this.state.isMenuOpen ? "block" : "hidden"}>
           <div>
             <GradientBtn className="mr-4">
               <Link to="/login">Log in</Link>
