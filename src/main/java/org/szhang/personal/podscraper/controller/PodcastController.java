@@ -42,9 +42,14 @@ public class PodcastController {
     return podcastService.getPodcastByID(id);
   }
 
-  @GetMapping("/mypodcasts")
+  @GetMapping("/mypodcasts/{id}")
   public Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "id") Long id) {
     return userService.getMySavedPodcasts(id);
+  }
+
+  @GetMapping("/mypodcasts/{name}")
+  public Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "name") String name) {
+    return userService.getMySavedPodcasts(name);
   }
 
   @PostMapping("/save/podcast/{podId}/user{userId}")

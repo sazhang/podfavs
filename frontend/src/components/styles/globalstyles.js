@@ -35,7 +35,7 @@ export const FormInput = styled.input`
   ${tw`focus:outline-none focus:shadow-outline focus:shadow-indigo rounded w-full py-2 px-3 mb-3 shadow-md appearance-none`};
 `;
 
-const btnStyle = css`
+const gradientBtnStyle = css`
   ${tw`font-semibold py-2 px-4 rounded shadow text-white inline-block mt-4 md:mt-0`};
   transition: 0.5s;
   background-size: 200% auto;
@@ -48,11 +48,30 @@ const btnStyle = css`
 `;
 
 export const GradientBtn = styled.button`
-  ${btnStyle}
+  ${gradientBtnStyle}
   background-image: linear-gradient(to right, #B24592 0%, #F15F79 51%, #B24592 100%);
 `;
 
 export const GradientBtnTwo = styled.button`
-  ${btnStyle}
+  ${gradientBtnStyle}
   background-image: linear-gradient(to right, #F15F79 0%, #B24592 51%, #F15F79 100%);
+`;
+
+export const CardDeck = styled.div`
+  ${tw`flex flex-wrap -m-3 h-full`};
+`;
+
+export const btnStyle = css`
+  ${tw`text-indigo font-semibold bg-indigo-lightest border border-indigo-lightest p-2`};
+`;
+
+export const SvgBtn = styled.button`
+  svg {
+    stroke: #6574cd;
+  }
+  &:hover {
+    svg {
+      fill: #6574cd;
+    }
+  }
 `;

@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import tw from "tailwind.macro";
+import { btnStyle, SvgBtn } from "../styles/globalstyles";
+import { ReactComponent as Bookmark } from "../images/bookmark.svg";
 
-// A card that provides information about a podcast.
+// A card that provides information about a podcast
 const CardWrapper = styled.div`
   ${tw`w-full sm:w-1/2 lg:w-1/3 max-w-sm`};
 `;
 
 const Card = styled.div`
-  ${tw`flex flex-wrap shadow-lg rounded bg-grey-lightest items-center p-4 m-2`};
+  ${tw`flex flex-wrap shadow-lg rounded bg-grey-lightest items-center p-4 m-3`};
 `;
 
 const InfoWrapper = styled.div`
@@ -29,31 +31,18 @@ const ImgDiv = styled.div`
 `;
 
 const ButtonsDiv = styled.div`
-  ${tw`flex w-full justify-between mt-2`};
+  ${tw`flex w-full justify-between mt-3`};
 `;
 
-const CardBtn = styled.button`
-  ${tw`text-xs font-semibold rounded px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white`};
+const CardBtn = styled.a`
+  ${btnStyle}
+  ${tw`no-underline text-sm rounded hover:bg-transparent hover:border-indigo-lighter`};
 `;
 
 class PodcastCard extends Component {
   constructor(props) {
     super(props);
     this.state = { opacity: 0 };
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-  }
-
-  handleMouseEnter() {
-    this.setState(state => ({
-      opacity: 1
-    }));
-  }
-
-  handleMouseLeave() {
-    this.setState(state => ({
-      opacity: 0
-    }));
   }
 
   shortenDescription(name, descrip) {
@@ -70,7 +59,7 @@ class PodcastCard extends Component {
     const aPodcast = this.props.podcast;
     const name = aPodcast.name;
     const descrip = aPodcast.description;
-    console.log(aPodcast);
+    const link = aPodcast.url;
 
     return (
       <CardWrapper>
@@ -92,12 +81,10 @@ class PodcastCard extends Component {
             </ImgDiv>
           </InfoWrapper>
           <ButtonsDiv>
-            <CardBtn>
-              Learn more
-            </CardBtn>
-            <CardBtn>
-              Save
-            </CardBtn>
+            <CardBtn href={link} target="_blank">Learn more</CardBtn>
+            <SvgBtn>
+              <Bookmark />
+            </SvgBtn>
           </ButtonsDiv>
         </Card>
       </CardWrapper>
@@ -110,10 +97,3 @@ PodcastCard.propTypes = {
 };
 
 export default PodcastCard;
-
-/* <Card>
-        <img
-          src={aPodcast.imageUrl}
-          alt="podcast cover"
-        />
-      </Card> */

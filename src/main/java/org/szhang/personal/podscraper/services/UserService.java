@@ -27,6 +27,11 @@ public class UserService {
     return userRepository.getMySavedPodcasts(id);
   }
 
+  @Transactional(readOnly = true)
+  public Collection<Podcast> getMySavedPodcasts(String name) {
+    return userRepository.getMySavedPodcasts(name);
+  }
+
   @Transactional
   public void saveAPodcast(Long podId, Long userId) {
     userRepository.saveAPodcast(podId, userId);

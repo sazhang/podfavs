@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Global, css } from "@emotion/core";
+import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
 import tw from "tailwind.macro";
 import SearchBar from "./SearchBar";
@@ -32,12 +33,17 @@ const wrapLayout = WrappedComponent => {
       console.log(url);
       fetch(url)
         .then(response => response.json())
-        .then(data => this.setState({ podcastRecs: data }))
-        .catch(err => console.error("Caught error: ", err));
-      console.log(this.state.podcastRecs);
+        .then(data =>
+          this.setState({ podcastRecs: data })
+        );
+      //.catch(err => console.error("Caught error: ", err))
+      //console.log(this.state.podcastRecs);
+      this.props.history.push('/recs');
     }
 
     render() {
+      console.log(this.state.podcastRecs);
+      
       return (
         <>
           <Global
@@ -59,7 +65,10 @@ const wrapLayout = WrappedComponent => {
               body {
                 ${tw`p-0 m-0 font-sans bg-indigo-darkest`};
               }
-              h1, h3, h4, h5 {
+              h1,
+              h3,
+              h4,
+              h5 {
                 ${tw`font-sans`};
               }
               h1 {
@@ -82,10 +91,7 @@ const wrapLayout = WrappedComponent => {
               onHandleChange={this.handleChange}
               onHandleSubmit={this.handleSubmit}
             />
-            <WrappedComponent
-              {...this.props}
-              podcastRecs={this.state.podcastRecs}
-            />
+            <WrappedComponent {...this.state} {...this.props} onHandleSubmit={this.handleSubmit} />
           </Main>
           <Footer />
         </>

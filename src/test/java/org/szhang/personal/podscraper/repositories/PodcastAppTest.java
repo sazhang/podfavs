@@ -59,6 +59,8 @@ public class PodcastAppTest {
   public void testGetMySavedPodcasts() {
     Collection<Podcast> savedPodcasts = userRepository.getMySavedPodcasts(18645L);
     assertEquals(1, savedPodcasts.size());
+    savedPodcasts = userRepository.getMySavedPodcasts("dwightschrute"); // ^ id
+    assertEquals(1, savedPodcasts.size());
   }
 
   @Test
