@@ -8,15 +8,15 @@ import styled from "@emotion/styled";
 
 import Home from "./components/pages/Home";
 import LoginPage from "./components/auth/LoginPage";
-import RegisterPage from "./components/auth/RegisterPage";
 import Dashboard from "./components/pages/Dashboard";
 import SearchBar from "./components/layout/SearchBar";
 import Footer from "./components/layout/Footer";
 import SearchResults from "./components/pages/SearchResults";
 
 // Route renders UI when app location matches the path
-const Main = styled.main`
-  ${tw`flex flex-wrap min-h-screen w-full justify-center`};
+const Content = styled.div`
+  ${tw`w-full px-5 pb-5 sm:px-8 sm:pb-8`};
+  flex: 1 0 auto;
 `;
 
 function onAuthRequired({ history }) {
@@ -35,22 +35,12 @@ class App extends Component {
         >
           <Global
             styles={css`
-              *,
-              *:before,
-              *:after {
-                box-sizing: inherit;
-              }
-              html {
-                text-rendering: optimizeLegibility;
+              * {
                 box-sizing: border-box;
-                -ms-overflow-style: scrollbar;
-                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
               }
               html,
               body {
-                ${tw`p-0 m-0 font-sans bg-indigo-darkest`};
+                ${tw`w-full h-full p-0 m-0 font-sans bg-indigo-darkest`};
               }
               h1,
               h2,
@@ -76,28 +66,22 @@ class App extends Component {
               }
             `}
           />
-          <Main>
-            <SearchBar />
-            <Switch>
+          <SearchBar />
+          <main className="flex flex-col flex-no-shrink min-h-screen justify-center">
+            <Content>
               <Route exact path="/" component={Home} />
-              {/* <Route path="/login" component={LoginPage} /> */}
               <Route
                 path="/login"
                 render={() => (
-                  <LoginPage
-                    baseUrl="https://dev-992080.okta.com"
-                    clientId={config.client_id}
-                    redirectUri={config.redirect_uri}
-                  />
+                  <LoginPage baseUrl="https://dev-992080.okta.com" />
                 )}
               />
-              <Route path="/implicit/callback" component={ImplicitCallback} />
-              <Route path="/register" component={RegisterPage} />
               <Route path="/api/search/:userQuery" component={SearchResults} />
               <SecureRoute path="/dashboard" component={Dashboard} />
-            </Switch>
-          </Main>
-          <Footer />
+              <Route path="/implicit/callback" component={ImplicitCallback} />
+            </Content>
+            <Footer />
+          </main>
         </Security>
       </Router>
     );

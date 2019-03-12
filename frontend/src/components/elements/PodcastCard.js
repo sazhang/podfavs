@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import tw from "tailwind.macro";
-import { btnStyle, SvgBtn } from "../styles/globalstyles";
+import LazyLoad from "react-lazy-load";
+import { SvgBtn } from "../styles/globalstyles";
 import { ReactComponent as Bookmark } from "../images/bookmark.svg";
+import PodcastImg from "./PodcastImg";
 
 // A card that provides information about a podcast
 const CardWrapper = styled.div`
-  ${tw`w-full sm:w-1/2 lg:w-1/3 max-w-sm`};
+  ${tw`w-full sm:w-1/2 lg:w-1/3`};
 `;
 
 const Card = styled.div`
@@ -27,7 +29,7 @@ const Description = styled.p`
 `;
 
 const ImgDiv = styled.div`
-  ${tw`flex-no-shrink ml-2 md:ml-4`};
+  ${tw`flex-no-shrink ml-2 md:ml-4 w-24 lg:w-32`};
 `;
 
 const ButtonsDiv = styled.div`
@@ -35,8 +37,7 @@ const ButtonsDiv = styled.div`
 `;
 
 const CardBtn = styled.a`
-  ${btnStyle}
-  ${tw`no-underline text-sm rounded hover:bg-transparent hover:border-indigo-lighter`};
+  ${tw`text-indigo font-semibold bg-indigo-lightest border border-indigo-lightest no-underline text-sm rounded hover:bg-transparent hover:border-indigo-lighter p-2`};
 `;
 
 class PodcastCard extends Component {
@@ -73,15 +74,15 @@ class PodcastCard extends Component {
               </Description>
             </Info>
             <ImgDiv>
-              <img
-                className="w-24 lg:w-32 rounded"
-                src={aPodcast.imageUrl}
-                alt="podcast cover"
-              />
+              <LazyLoad debounce={false} offsetVertical={100}>
+                <PodcastImg imageUrl={aPodcast.imageUrl} />
+              </LazyLoad>
             </ImgDiv>
           </InfoWrapper>
           <ButtonsDiv>
-            <CardBtn href={link} target="_blank">Learn more</CardBtn>
+            <CardBtn href={link} target="_blank">
+              Learn more
+            </CardBtn>
             <SvgBtn>
               <Bookmark />
             </SvgBtn>

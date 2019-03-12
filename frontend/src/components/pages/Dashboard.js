@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Container, Wrapper } from "../styles/globalstyles";
+import { Container, MaxWidth } from "../styles/globalstyles";
 import { withAuth } from "@okta/okta-react";
-import FeaturedPodcasts from "../layout/FeaturedPodcasts";
+import MyPodcasts from "../layout/MyPodcasts";
 
 // Dashboard that lets users see
 export default withAuth(
@@ -22,20 +22,15 @@ export default withAuth(
 
     render() {
       if (!this.state.user) return null;
-      
+      console.log(this.state.user);
+
       return (
-        <>
-          <Container>
-            <Wrapper>
-              <div className="w-3/4">
-                <h3>{this.state.user.name}</h3>
-              </div>
-              {/* <div className="w-1/4">
-              <FeaturedPodcasts />
-            </div> */}
-            </Wrapper>
-          </Container>
-        </>
+        <Container>
+          <MaxWidth>
+            <h2>My saved podcasts</h2>
+            <MyPodcasts auth={this.props.auth}/>
+          </MaxWidth>
+        </Container>
       );
     }
   }

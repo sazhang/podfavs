@@ -18,22 +18,32 @@ import java.util.List;
 public interface UserRepository extends Neo4jRepository<User, Long> {
 
   /**
-   * Get the user's list of saved podcasts.
+   * Create user.
    *
-   * @param id   user id
-   * @return podcasts
+   * @param userId    user id given by Okta
+   * @param email     user's email address
+   * @return user
    */
-  @Query("MATCH usr=(u:User)-[:SAVED]->(p:Podcast) WHERE ID(u) = {id} RETURN p")
-  Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "id") Long id);
+  @Query("CREATE (u:User { userId: {userId}, email: {email} }) RETURN u")
+  User createUser(@PathVariable(value = "userId") String userId, @PathVariable(value = "email") String email);
+
+  /**
+   * Retrieve user.
+   *
+   * @param userId    user id
+   * @return user
+   */
+  @Query("MATCH usr=(u:User)-[:SAVED]->(p:Podcast) WHERE u.userId = {userId} RETURN u")
+  User findByUserId(@PathVariable(value = "userId") String userId);
 
   /**
    * Get the user's list of saved podcasts.
    *
-   * @param name    username
+   * @param userId    user id
    * @return podcasts
    */
-  @Query("MATCH usr=(u:User)-[:SAVED]->(p:Podcast) WHERE u.username = {name} RETURN p")
-  Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "name") String name);
+  @Query("MATCH usr=(u:User)-[:SAVED]->(p:Podcast) WHERE u.userId = {userId} RETURN p")
+  Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "userId") String userId);
 
   /**
    * User saves a podcast.
@@ -42,9 +52,9 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
    * @param userId  user id
    */
   @Query("MATCH (u:User),(p:Podcast) " +
-      "WHERE ID(u) = {userId} AND ID(p) = {podId} " +
+      "WHERE u.userId = {userId} AND ID(p) = {podId} " +
       "MERGE (u)-[r:SAVED]->(p)")
-  void saveAPodcast(@Param("podId") Long podId, @Param("userId") Long userId);
+  void saveAPodcast(@Param("podId") Long podId, @Param("userId") String userId);
 
   /**
    * User unsaves a podcast.
@@ -53,9 +63,9 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
    * @param userId  user id
    */
   @Query("MATCH (u:User)-[r:SAVED]->(p:Podcast) " +
-      "WHERE ID(u) = {userId} AND ID(p) = {podId} " +
+      "WHERE u.userId = {userId} AND ID(p) = {podId} " +
       "DELETE r")
-  void unsaveAPodcast(@Param("podId") Long podId, @Param("userId") Long userId);
+  void unsaveAPodcast(@Param("podId") Long podId, @Param("userId") String userId);
 
   /**
    * User saves all podcasts in current list.
@@ -65,9 +75,9 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
    */
   @Query("UNWIND {podIds} AS podId " +
       "MATCH (u:User),(p:Podcast) " +
-      "WHERE ID(u) = {userId} AND ID(p) = podId " +
+      "WHERE u.userId = {userId} AND ID(p) = podId " +
       "MERGE (u)-[r:SAVED]->(p)")
-  void saveAllPodcasts(@Param("podIds") List<Long> podIds, @Param("userId") Long userId);
+  void saveAllPodcasts(@Param("podIds") List<Long> podIds, @Param("userId") String userId);
 
   /**
    * User unsaves all podcasts in current list.
@@ -77,7 +87,7 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
    */
   @Query("UNWIND {podIds} AS podId " +
       "MATCH (u:User)-[r:SAVED]->(p:Podcast) " +
-      "WHERE ID(u) = {userId} AND ID(p) = podId " +
+      "WHERE u.userId = {userId} AND ID(p) = podId " +
       "DELETE r")
-  void unsaveAllPodcasts(@Param("podIds") List<Long> podIds, @Param("userId") Long userId);
+  void unsaveAllPodcasts(@Param("podIds") List<Long> podIds, @Param("userId") String userId);
 }

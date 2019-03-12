@@ -12,12 +12,10 @@ import java.util.List;
 public class User extends Entity {
 
   @Index(unique=true)
-  private String username;
+  private String userId; // id is given by Okta
 
   @Index(unique=true)
   private String email;
-
-  private String password;
 
   @JsonIgnoreProperties("users")
   @Relationship(type = "SAVED")
@@ -30,13 +28,12 @@ public class User extends Entity {
   /**
    * Construct a new user with the given characteristics.
    *
-   * @param username    username
-   * @param email       user email address
+   * @param userId    unique id provided by Okta
+   * @param email     user email address
    */
-  public User(String username, String email, String password) {
-    this.username = username;
+  public User(String userId, String email) {
+    this.userId = userId;
     this.email = email;
-    this.password = password;
     this.savedPodcasts = new ArrayList<>();
     //this.ratedPodcasts = new ArrayList<>();
   }
@@ -57,12 +54,12 @@ public class User extends Entity {
   /**
    * Getters & setters for user characteristics.
    */
-  public String getUsername() {
-    return username;
+  public String getUserId() {
+    return userId;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setUserId(String userId) {
+    this.userId = userId;
   }
 
   public String getEmail() {
@@ -88,12 +85,4 @@ public class User extends Entity {
   public void setRatedPodcasts(List<Podcast> ratedPodcasts) {
     this.ratedPodcasts = ratedPodcasts;
   }*/
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
 }

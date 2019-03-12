@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { withAuth } from "@okta/okta-react";
-import { Container, Wrapper } from "../styles/globalstyles";
-import { ReactComponent as LoginSvg } from "../images/login.svg";
+import { Container, MaxWidth } from "../styles/globalstyles";
 import LoginWidget from "./LoginWidget";
-// import LoginForm from "./LoginForm";
 
 // If user has logged in, redirect to user dashboard, else display login form
 export default withAuth(
-  class Login extends Component {
+  class LoginPage extends Component {
     constructor(props) {
       super(props);
       this.state = { authenticated: null };
-      this.checkAuthentication = this.checkAuthentication.bind(this);
+      //this.checkAuthentication = this.checkAuthentication.bind(this);
       this.checkAuthentication();
+      this.onSuccess = this.onSuccess.bind(this);
+      this.onError = this.onError.bind(this);
     }
 
     async checkAuthentication() {
@@ -27,40 +27,43 @@ export default withAuth(
       this.checkAuthentication();
     }
 
-    onSuccess = res => {
-      return this.props.auth.redirect({
-        sessionToken: res.session.token
-      });
-    };
+    onSuccess(res) {
+      if (res.status === "SUCCESS") {
+        console.log("SUCCESS");
+        console.log(res);
+        return this.props.auth.redirect({
+          sessionToken: res.session.token
+        });
+      } else {
+        // The user can be in another authentication state that requires further action.
+        // For more information about these states, see:
+        //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
+      }
+    }
 
-    onError = err => {
+    onError(err) {
       console.log("error logging in", err);
-    };
+    }
 
     render() {
       if (this.state.authenticated === null) return null;
       return this.state.authenticated ? (
-        <Redirect to={{ pathname: "/dashboard" }} />
+        <Redirect to={{ pathname: "/" }} />
       ) : (
         <Container>
-          <Wrapper>
-            <div className="w-full md:flex-1">
-              <h1>Save podcasts to binge later</h1>
-              <LoginSvg className="w-full h-full" />
-            </div>
-            <div className="md:flex-1">
+          <MaxWidth>
+            <div>
               <LoginWidget
                 baseUrl={this.props.baseUrl}
-                clientId={this.props.clientId}
-                redirectUri={this.props.redirectUri}
+                //clientId={this.props.clientId}
+                //redirectUri={this.props.redirectUri}
                 onSuccess={this.onSuccess}
                 onError={this.onError}
               />
             </div>
-          </Wrapper>
+          </MaxWidth>
         </Container>
       );
     }
   }
 );
-/* <LoginForm baseUrl={this.props.baseUrl} /> */

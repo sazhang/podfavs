@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Container, Wrapper } from "../styles/globalstyles";
+import { Container, MaxWidth } from "../styles/globalstyles";
 import { CardDeck } from "../styles/globalstyles";
-import PodcastCard from "../layout/PodcastCard";
-//import InputChips from "../layout/InputChips";
+import PodcastCard from "../elements/PodcastCard";
+import InputChips from "../elements/InputChips";
 
 // Render a list of podcast recommendations
 class SearchResults extends Component {
@@ -26,7 +26,7 @@ class SearchResults extends Component {
   }
 
   fetchData(userQuery) {
-    const query = userQuery.split(",");
+    const query = userQuery.split(",").filter(String);
     this.setState({ query: query });
 
     fetch("")
@@ -44,13 +44,11 @@ class SearchResults extends Component {
 
     return (
       <Container>
-        <Wrapper>
-          <div className="w-full">
-            <h3>Podcasts for you</h3>
-            {/* <InputChips query={this.state.query} /> */}
-          </div>
+        <MaxWidth>
+          <h2>Podcasts related to:</h2>
+          <InputChips query={this.state.query} />
           <CardDeck>{cards}</CardDeck>
-        </Wrapper>
+        </MaxWidth>
       </Container>
     );
   }

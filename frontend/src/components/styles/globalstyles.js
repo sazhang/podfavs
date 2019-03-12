@@ -4,15 +4,15 @@ import tw from "tailwind.macro";
 
 // Global styles
 export const Container = styled.div`
-  ${tw`h-full w-full max-w-2xl m-5 sm:m-8`};
+  ${tw`w-full justify-center mt-8`};
+`;
+
+export const MaxWidth = styled.div`
+  ${tw`max-w-3xl mx-auto`};
 `;
 
 export const Wrapper = styled.div`
-  ${tw`flex flex-wrap justify-center items-center`};
-`;
-
-export const HalfDiv = styled.div`
-  ${tw`w-full h-full sm:w-1/2`};
+  ${tw`flex flex-wrap justify-center items-center`}; 
 `;
 
 export const IconBtn = styled.button`
@@ -58,11 +58,7 @@ export const GradientBtnTwo = styled.button`
 `;
 
 export const CardDeck = styled.div`
-  ${tw`flex flex-wrap -m-3 h-full`};
-`;
-
-export const btnStyle = css`
-  ${tw`text-indigo font-semibold bg-indigo-lightest border border-indigo-lightest p-2`};
+  ${tw`flex flex-wrap -mx-3`};
 `;
 
 export const SvgBtn = styled.button`

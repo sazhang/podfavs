@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CardDeck } from "../styles/globalstyles";
-import PodcastCard from "../layout/PodcastCard";
+import PodcastCard from "../elements/PodcastCard";
 
 // Render a list of randomly selected podcasts to be featured
 class FeaturedPodcasts extends Component {

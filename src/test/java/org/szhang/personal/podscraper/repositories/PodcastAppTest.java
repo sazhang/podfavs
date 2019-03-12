@@ -57,8 +57,8 @@ public class PodcastAppTest {
 
   @Test
   public void testGetMySavedPodcasts() {
-    Collection<Podcast> savedPodcasts = userRepository.getMySavedPodcasts(18645L);
-    assertEquals(1, savedPodcasts.size());
+    Collection<Podcast> savedPodcasts = userRepository.getMySavedPodcasts("michaelscott");
+    assertEquals(2, savedPodcasts.size());
     savedPodcasts = userRepository.getMySavedPodcasts("dwightschrute"); // ^ id
     assertEquals(1, savedPodcasts.size());
   }
@@ -74,7 +74,7 @@ public class PodcastAppTest {
 
   @Test
   public void testSaveThenUnsavePodcast() {
-    long michaelId = 19054L;
+    String michaelId = "michaelscott";
     long podcastId = 18837L;
     // save a podcast
     assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
@@ -90,7 +90,7 @@ public class PodcastAppTest {
 
   @Test
   public void testSaveThenUnsaveManyPodcasts() {
-    long michaelId = 19054L;
+    String michaelId = "michaelscott";
     List<Long> podcastIds = new ArrayList<>(Arrays.asList(18837L, 18861L));
     // save podcasts
     assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());

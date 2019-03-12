@@ -4,24 +4,25 @@ import tw from "tailwind.macro";
 
 //Render a list of podcasts.
 const FooterDiv = styled.footer`
-  ${tw`flex w-full h-16 justify-center items-center bg-indigo-darker text-indigo-lighter shadow`};
+  ${tw`flex-no-shrink w-full justify-center items-center bg-indigo-darker text-indigo-lighter shadow p-4`};
   a {
     ${tw`text-indigo-lighter hover:text-indigo`};
   }
 `;
 
 const Footer = () => (
-  // populate the table with podcast components
   <FooterDiv>
-    <span>Check out the project on&nbsp;</span>
-    <a
-      href="https://github.com/sazhang/podfavs"
-      title="github"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      github
-    </a>
+    <div className="flex justify-center items-center">
+      <span>Check out the project on&nbsp;</span>
+      <a
+        href="https://github.com/sazhang/podfavs"
+        title="github"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        github
+      </a>
+    </div>
   </FooterDiv>
 );
 

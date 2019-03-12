@@ -195,8 +195,8 @@ public class DatabaseLoader implements CommandLineRunner {
    * Add two users to the database for test use.
    */
   private void addTwoTestUsers() {
-    User michael = new User("michaelscott", "michael@dunder.mifflin", "peoplepapercompany");
-    User dwight = new User("dwightschrute", "dwight@schrute.farms", "beets4lifejim");
+    User michael = new User("michaelscott", "michael@dunder.mifflin");
+    User dwight = new User("dwightschrute", "dwight@schrute.farms");
     List<User> testUsers = new ArrayList<>(Arrays.asList(michael, dwight));
     session.save(testUsers);
     session.clear();

@@ -9,12 +9,14 @@ class LoginWidget extends Component {
     const el = ReactDOM.findDOMNode(this);
     this.widget = new OktaSignIn({
       baseUrl: this.props.baseUrl,
-      clientId: this.props.clientId,
-      redirectUri: this.props.redirectUri,
+      //clientId: this.props.clientId,
+      //redirectUri: this.props.redirectUri,
       i18n: {
         en: {
-          "primaryauth.title": "Find podcasts you'll enjoy",
-          "primaryauth.submit": "Log in"
+          "primaryauth.title": "Discover and save bingeworthy podcasts",
+          "primaryauth.submit": "Log in",
+          "primaryauth.username.placeholder": "Email",
+          "primaryauth.username.tooltip": "Email"
         }
       },
       features: {
