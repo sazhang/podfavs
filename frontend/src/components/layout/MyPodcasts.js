@@ -1,45 +1,44 @@
 import React, { Component } from "react";
 import { CardDeck } from "../styles/globalstyles";
 import PodcastCard from "../elements/PodcastCard";
+import { withAuth } from "@okta/okta-react";
 
 // Render a list of randomly selected podcasts to be featured
-class MyPodcasts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      featured: []
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      const response = await fetch("api/mypodcasts", {
-        headers: {
-          Authorization: "Bearer " + (await this.props.auth.getAccessToken())
-        }
-      });
-      console.log("Auth token: " + this.props.auth.getAccessToken());
-      const data = await response.json();
-      console.log("Response: " + data);
-      this.setState({ featured: data });
-    } catch (err) {
-      console.error("Caught error: ", err);
+export default withAuth(
+  class MyPodcasts extends Component {
+    constructor(props) {
+      super(props);
+      this.state = { podcasts: [], loaded: false };
     }
-    /* fetch("api/mypodcasts")
-      .then(response => response.json())
-      .then(data => this.setState({ featured: data }))
-      .catch(err => console.error("Caught error: ", err)); */
+
+    componentDidMount() {
+      const token = JSON.parse(localStorage.getItem("okta-token-storage"));
+      console.log(token);
+      //const email = idToken.idToken.claims.email;
+      //const userId = idToken.idToken.claims.sub;
+
+      fetch("/api/mypodcasts", {
+        credentials: "include",
+        headers: {
+          Authorization: "Bearer " + token.accessToken//this.props.auth.getAccessToken()
+        }
+      })
+        .then(response => response.json())
+        .then(data => this.setState({ podcasts: data, loaded: true }))
+        .catch(err => console.error("Caught error: ", err));
+    }
+
+    render() {
+      const cards = [];
+      const { podcasts, loaded } = this.state;
+      if (loaded) {
+        podcasts.map(podcast =>
+          cards.push(<PodcastCard key={podcast.id} podcast={podcast} />)
+        );
+      }
+      return <CardDeck>{cards}</CardDeck>;
+    }
   }
+);
 
-  render() {
-    const cards = [];
-    this.state.featured.map(podcast =>
-      cards.push(<PodcastCard key={podcast.id} podcast={podcast} />)
-    );
-
-    // populate the table with podcasts
-    return <CardDeck>{cards}</CardDeck>;
-  }
-}
-
-export default MyPodcasts;
+//export default MyPodcasts;

@@ -12,7 +12,7 @@ class FeaturedPodcasts extends Component {
   }
 
   componentDidMount() {
-    fetch("api/featured")
+    fetch("/featured")
       .then(response => response.json())
       .then(data => this.setState({ featured: data }))
       .catch(err => console.error("Caught error: ", err));

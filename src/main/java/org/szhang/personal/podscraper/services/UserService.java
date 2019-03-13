@@ -24,8 +24,8 @@ public class UserService {
   }
 
   @Transactional
-  public User createUser(String userId, String email) {
-    return userRepository.createUser(userId, email);
+  public User createUser(String email) {
+    return userRepository.createUser(email);
   }
 
   @Transactional
@@ -34,22 +34,32 @@ public class UserService {
   }
 
   @Transactional
-  public void saveAPodcast(Long podId, String userId) {
-    userRepository.saveAPodcast(podId, userId);
+  public User findByUserEmail(String email) {
+    return userRepository.findByUserEmail(email);
   }
 
   @Transactional
-  public void unsaveAPodcast(Long podId, String userId) {
-    userRepository.unsaveAPodcast(podId, userId);
+  public Collection<Podcast> getMySavedPodcasts(Long id) {
+    return userRepository.getMySavedPodcasts(id);
   }
 
   @Transactional
-  public void saveAllPodcasts(List<Long> podIds, String userId) {
-    userRepository.saveAllPodcasts(podIds, userId);
+  public void saveAPodcast(Long podId, Long id) {
+    userRepository.saveAPodcast(podId, id);
   }
 
   @Transactional
-  public void unsaveAllPodcasts(List<Long> podIds, String userId) {
-    userRepository.unsaveAllPodcasts(podIds, userId);
+  public void unsaveAPodcast(Long podId, Long id) {
+    userRepository.unsaveAPodcast(podId, id);
+  }
+
+  @Transactional
+  public void saveAllPodcasts(List<Long> podIds, Long id) {
+    userRepository.saveAllPodcasts(podIds, id);
+  }
+
+  @Transactional
+  public void unsaveAllPodcasts(List<Long> podIds, Long id) {
+    userRepository.unsaveAllPodcasts(podIds, id);
   }
 }

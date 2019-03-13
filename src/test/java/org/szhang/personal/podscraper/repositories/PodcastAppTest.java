@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.szhang.personal.podscraper.domain.Category;
 import org.szhang.personal.podscraper.domain.Keyword;
 import org.szhang.personal.podscraper.domain.Podcast;
+import org.szhang.personal.podscraper.domain.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -57,10 +58,10 @@ public class PodcastAppTest {
 
   @Test
   public void testGetMySavedPodcasts() {
-    Collection<Podcast> savedPodcasts = userRepository.getMySavedPodcasts("michaelscott");
+    Collection<Podcast> savedPodcasts = userRepository.getMySavedPodcasts(19054L);
     assertEquals(2, savedPodcasts.size());
-    savedPodcasts = userRepository.getMySavedPodcasts("dwightschrute"); // ^ id
-    assertEquals(1, savedPodcasts.size());
+    savedPodcasts = userRepository.getMySavedPodcasts(123L);
+    assertEquals(0, savedPodcasts.size());
   }
 
   @Test
@@ -74,7 +75,7 @@ public class PodcastAppTest {
 
   @Test
   public void testSaveThenUnsavePodcast() {
-    String michaelId = "michaelscott";
+    long michaelId = 19054L;
     long podcastId = 18837L;
     // save a podcast
     assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
@@ -90,7 +91,7 @@ public class PodcastAppTest {
 
   @Test
   public void testSaveThenUnsaveManyPodcasts() {
-    String michaelId = "michaelscott";
+    long michaelId = 19054L;
     List<Long> podcastIds = new ArrayList<>(Arrays.asList(18837L, 18861L));
     // save podcasts
     assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
@@ -99,5 +100,16 @@ public class PodcastAppTest {
     // unsave podcasts
     userRepository.unsaveAllPodcasts(podcastIds, michaelId);
     assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
+  }
+
+  @Test
+  public void testGetUser() {
+    String michaelId = "michaelscott";
+    User existingUser = userRepository.findByUserId(michaelId);
+    assertTrue(existingUser != null);
+
+    String unknownId = "stranger";
+    User userDoesNotExist = userRepository.findByUserId(unknownId);
+    assertTrue(userDoesNotExist == null);
   }
 }

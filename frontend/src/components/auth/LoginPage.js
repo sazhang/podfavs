@@ -10,7 +10,6 @@ export default withAuth(
     constructor(props) {
       super(props);
       this.state = { authenticated: null };
-      //this.checkAuthentication = this.checkAuthentication.bind(this);
       this.checkAuthentication();
       this.onSuccess = this.onSuccess.bind(this);
       this.onError = this.onError.bind(this);

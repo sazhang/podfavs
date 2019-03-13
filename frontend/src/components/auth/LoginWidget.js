@@ -4,6 +4,7 @@ import OktaSignIn from "@okta/okta-signin-widget";
 import "@okta/okta-signin-widget/dist/css/okta-sign-in.min.css";
 import "@okta/okta-signin-widget/dist/css/okta-theme.css";
 
+// Okta widget handles both sign in and sign up
 class LoginWidget extends Component {
   componentDidMount() {
     const el = ReactDOM.findDOMNode(this);

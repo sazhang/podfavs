@@ -1,7 +1,11 @@
 package org.szhang.personal.podscraper.controller;
 
+import org.springframework.security.core.Authentication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -12,6 +16,7 @@ import org.szhang.personal.podscraper.services.PodcastService;
 import org.szhang.personal.podscraper.services.UserService;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +26,9 @@ import java.util.Map;
  */
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api")
 public class PodcastController {
+
+  private final Logger log = LoggerFactory.getLogger(PodcastController.class);
 
   private final PodcastService podcastService;
   private final UserService userService;
@@ -48,53 +54,54 @@ public class PodcastController {
     return podcastService.getPodcastByID(id);
   }
 
-  @GetMapping("/mypodcasts")
-  public Collection<Podcast> getMySavedPodcasts(JwtAuthenticationToken authentication) {
-    //OAuth2Authentication authentication = (OAuth2Authentication) principal;
-    //Map<String, Object> details = principal.getAttributes();
-    //Map<String, Object> details = (Map<String, Object>) authentication.getUserAuthentication().getDetails();
-    Map<String, Object> details = authentication.getTokenAttributes();
-    System.out.println("THE details " + details);
-    String userId = details.get("uid").toString();
-    System.out.println("THE userId " + userId);
-    String email = details.get("sub").toString();
-    System.out.println("THE EMAIL " + email);
-    User user = getUserFromDb(userId, email);
-    return user.getSavedPodcasts();
+  @GetMapping("/api/mypodcasts")
+  public Collection<Podcast> getMySavedPodcasts(Principal principal) {
+    String email = principal.getName();
+
+    User user = getUserFromDb(email);
+    System.out.println(user.getId());
+    System.out.println(userService.getMySavedPodcasts(user.getId()));
+    return userService.getMySavedPodcasts(user.getId());
   }
 
-  @PostMapping("/save/podcast/{podId}/user{userId}")
-  public void saveAPodcast(Long podId, String userId) {
-    userService.saveAPodcast(podId, userId);
+  @PostMapping("/api/save/{podId}")
+  public void saveAPodcast(@PathVariable(value = "podId") Long podId, @PathVariable(value = "id") Long id) {
+    userService.saveAPodcast(podId, id);
   }
 
-  @DeleteMapping("/unsave/podcast/{podId}/user{userId}")
-  public void unsaveAPodcast(Long podId, String userId) {
-    userService.unsaveAPodcast(podId, userId);
+  @DeleteMapping("/api/unsave/{podId}")
+  public void unsaveAPodcast(@PathVariable(value = "podId") Long podId, @PathVariable(value = "id") Long id) {
+    userService.unsaveAPodcast(podId, id);
   }
 
-  @PostMapping("/savelist")
-  public void saveAllPodcasts(List<Long> podIds, String userId) {
-    userService.saveAllPodcasts(podIds, userId);
+  @PostMapping("/api/savelist/{podIds}")
+  public void saveAllPodcasts(@PathVariable(value = "podIds") List<Long> podIds, @PathVariable(value = "id") Long id) {
+    userService.saveAllPodcasts(podIds, id);
   }
 
-  @DeleteMapping("/unsavelist")
-  public void unsaveAllPodcasts(List<Long> podIds, String userId) {
-    userService.unsaveAllPodcasts(podIds, userId);
+  @DeleteMapping("/api/unsavelist/{podIds}")
+  public void unsaveAllPodcasts(@PathVariable(value = "podIds") List<Long> podIds, @PathVariable(value = "id") Long id) {
+    userService.unsaveAllPodcasts(podIds, id);
   }
 
   /**
    * Check if user exists in database, else create one.
    *
-   * @param userId user id given by Okta
    * @param email  user's email address
    * @return user
    */
-  private User getUserFromDb(String userId, String email) {
-    User user = userService.findByUserId(userId);
+  private User getUserFromDb(String email) {
+    /*Map<String, Object> details = authentication.getTokenAttributes();
+    String userId = details.get("uid").toString();
+    String email = details.get("sub").toString();
+    System.out.println(userId);
+    System.out.println(email);*/
+    User user = userService.findByUserEmail(email);
     if (user == null) {
-      return userService.createUser(userId, email);
+      System.out.println("USER DOES NOT EXIST SO CREATING ONE");
+      return userService.createUser(email);
     } else {
+      System.out.println("USER : " + user);
       return user;
     }
   }

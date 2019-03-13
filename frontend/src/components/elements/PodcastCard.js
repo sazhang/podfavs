@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import tw from "tailwind.macro";
 import LazyLoad from "react-lazy-load";
-import { SvgBtn } from "../styles/globalstyles";
-import { ReactComponent as Bookmark } from "../images/bookmark.svg";
 import PodcastImg from "./PodcastImg";
+import SaveBtn from "./SaveBtn";
 
 // A card that provides information about a podcast
 const CardWrapper = styled.div`
@@ -43,7 +42,12 @@ const CardBtn = styled.a`
 class PodcastCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { opacity: 0 };
+    this.state = {
+      authenticated: false,
+      userId: "",
+      isSaved: false
+    };
+    this.handleClickSave = this.handleClickSave.bind(this);
   }
 
   shortenDescription(name, descrip) {
@@ -56,11 +60,20 @@ class PodcastCard extends Component {
     }
   }
 
+  handleClickSave() {
+    if (this.state.userId.length > 0) {
+      this.setState({ isSaved: !this.state.isSaved });
+    } else {
+      console.log("Not auth!");
+    }
+  }
+
   render() {
     const aPodcast = this.props.podcast;
     const name = aPodcast.name;
     const descrip = aPodcast.description;
     const link = aPodcast.url;
+    const fill = this.state.isSaved ? "#6574cd" : "none";
 
     return (
       <CardWrapper>
@@ -83,9 +96,7 @@ class PodcastCard extends Component {
             <CardBtn href={link} target="_blank">
               Learn more
             </CardBtn>
-            <SvgBtn>
-              <Bookmark />
-            </SvgBtn>
+            <SaveBtn onClick={this.handleClickSave} fill={fill} />
           </ButtonsDiv>
         </Card>
       </CardWrapper>

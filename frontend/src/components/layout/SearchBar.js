@@ -42,8 +42,6 @@ export default withAuth(
           toRecs: false
         };
         this.checkAuthentication = this.checkAuthentication.bind(this);
-        this.checkAuthentication();
-
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -59,8 +57,12 @@ export default withAuth(
         }
       }
 
-      componentDidUpdate() {
-        this.checkAuthentication();
+      async componentDidMount() {
+        await this.checkAuthentication();
+      }
+    
+      async componentDidUpdate() {
+        await this.checkAuthentication();
       }
 
       async login() {
@@ -78,7 +80,7 @@ export default withAuth(
       // Pass user query to generate search results in a new page
       handleSubmit(event) {
         event.preventDefault();
-        const path = "/api/search/" + this.state.userQuery;
+        const path = "/search/" + this.state.userQuery;
         this.props.history.push({
           pathname: path,
           state: { userQuery: this.state.userQuery }

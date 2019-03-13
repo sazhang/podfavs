@@ -12,7 +12,7 @@ export const MaxWidth = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  ${tw`flex flex-wrap justify-center items-center`}; 
+  ${tw`flex flex-wrap justify-center items-center`};
 `;
 
 export const IconBtn = styled.button`
@@ -61,13 +61,3 @@ export const CardDeck = styled.div`
   ${tw`flex flex-wrap -mx-3`};
 `;
 
-export const SvgBtn = styled.button`
-  svg {
-    stroke: #6574cd;
-  }
-  &:hover {
-    svg {
-      fill: #6574cd;
-    }
-  }
-`;

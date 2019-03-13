@@ -76,9 +76,9 @@ class App extends Component {
                   <LoginPage baseUrl="https://dev-992080.okta.com" />
                 )}
               />
-              <Route path="/api/search/:userQuery" component={SearchResults} />
-              <SecureRoute path="/dashboard" component={Dashboard} />
               <Route path="/implicit/callback" component={ImplicitCallback} />
+              <Route path="/search/:userQuery" component={SearchResults} />
+              <SecureRoute path="/dashboard" component={Dashboard} />
             </Content>
             <Footer />
           </main>
