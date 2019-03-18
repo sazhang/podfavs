@@ -5,41 +5,53 @@ import { withAuth } from "@okta/okta-react";
 import { Redirect } from "react-router-dom";
 
 // Dashboard that lets users see
-export default withAuth(
-  class Dashboard extends Component {
+//export default withAuth(
+class Dashboard extends Component {
     constructor(props) {
       super(props);
-      this.state = { authenticated: null };
-      this.checkAuthentication = this.checkAuthentication.bind(this);
-      this.checkAuthentication();
+      this.state = { user: null }; //authenticated: null
+      //this.checkAuthentication = this.checkAuthentication.bind(this);
+      //this.checkAuthentication();
+      //this.getCurrentUser = this.getCurrentUser.bind(this);
+    }
+
+    /* async getCurrentUser() {
+      this.props.auth.getUser().then(user => this.setState({ user }));
+    }
+
+    componentDidMount() {
+      this.getCurrentUser();
     }
 
     async checkAuthentication() {
       const authenticated = await this.props.auth.isAuthenticated();
       if (authenticated !== this.state.authenticated) {
-        this.setState({ authenticated });
+        this.setState({ authenticated: authenticated });
       }
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
       this.checkAuthentication();
-    }
+    } */
 
     render() {
-      if (this.state.authenticated === null) return null;
-      const { auth } = this.props.auth;
-      console.log(auth);
+      //if (this.state.authenticated === null) return null;
+      if (!this.state.user) return null;
 
-      return this.state.authenticated ? (
+      return (
         <Container>
           <MaxWidth>
             <h2>My saved podcasts</h2>
-            <MyPodcasts auth={auth} />
+            <h2>{this.state.user.sub}</h2>
           </MaxWidth>
         </Container>
-      ) : (
-        <Redirect to={{ pathname: "/" }} />
       );
+      //this.state.authenticated ? (
+      /* ) : ( <MyPodcasts />
+        <Redirect to={{ pathname: "/" }} />
+      ); */
     }
   }
-);
+//);
+
+export default Dashboard;

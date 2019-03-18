@@ -4,41 +4,41 @@ import PodcastCard from "../elements/PodcastCard";
 import { withAuth } from "@okta/okta-react";
 
 // Render a list of randomly selected podcasts to be featured
-export default withAuth(
+//export default withAuth(
   class MyPodcasts extends Component {
     constructor(props) {
       super(props);
-      this.state = { podcasts: [], loaded: false };
+      this.state = { podcasts: [] };
     }
 
-    componentDidMount() {
+    /* async componentDidMount() {
       const token = JSON.parse(localStorage.getItem("okta-token-storage"));
       console.log(token);
       //const email = idToken.idToken.claims.email;
       //const userId = idToken.idToken.claims.sub;
-
-      fetch("/api/mypodcasts", {
-        credentials: "include",
-        headers: {
-          Authorization: "Bearer " + token.accessToken//this.props.auth.getAccessToken()
-        }
-      })
-        .then(response => response.json())
-        .then(data => this.setState({ podcasts: data, loaded: true }))
-        .catch(err => console.error("Caught error: ", err));
-    }
+      try {
+        const response = await fetch("/api/mypodcasts", {
+          headers: {
+            Authorization: "Bearer " + this.props.auth.getAccessToken()
+          }
+        });
+        const data = await response.json();
+        this.setState({ podcasts: data });
+      } catch (err) {
+        // handle error as needed
+      }
+    } */
 
     render() {
       const cards = [];
-      const { podcasts, loaded } = this.state;
-      if (loaded) {
-        podcasts.map(podcast =>
-          cards.push(<PodcastCard key={podcast.id} podcast={podcast} />)
-        );
-      }
+      const { podcasts } = this.state;
+      if (!podcasts) return <div><h2>loading...</h2></div>
+      podcasts.map(podcast =>
+        cards.push(<PodcastCard key={podcast.id} podcast={podcast} />)
+      );
       return <CardDeck>{cards}</CardDeck>;
     }
   }
-);
+//);
 
-//export default MyPodcasts;
+export default MyPodcasts;

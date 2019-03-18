@@ -7,7 +7,8 @@ class FeaturedPodcasts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      featured: []
+      featured: [],
+      errThrown: false
     };
   }
 
@@ -15,11 +16,13 @@ class FeaturedPodcasts extends Component {
     fetch("/featured")
       .then(response => response.json())
       .then(data => this.setState({ featured: data }))
-      .catch(err => console.error("Caught error: ", err));
+      .catch(err => this.setState({ errThrown: true }));
   }
 
   render() {
     const cards = [];
+    if (this.state.errThrown) return <div><h2>woops</h2></div>
+    if (!this.state.featured) return <div><h2>loading...</h2></div>
     this.state.featured.map(podcast =>
       cards.push(<PodcastCard key={podcast.id} podcast={podcast} />)
     );

@@ -5,17 +5,17 @@ import { Container, MaxWidth } from "../styles/globalstyles";
 import LoginWidget from "./LoginWidget";
 
 // If user has logged in, redirect to user dashboard, else display login form
-export default withAuth(
+//export default withAuth(
   class LoginPage extends Component {
     constructor(props) {
       super(props);
-      this.state = { authenticated: null };
-      this.checkAuthentication();
+      this.state = { authenticated: false }; //previously null
+      //this.checkAuthentication();
       this.onSuccess = this.onSuccess.bind(this);
       this.onError = this.onError.bind(this);
     }
 
-    async checkAuthentication() {
+    /* async checkAuthentication() {
       const authenticated = await this.props.auth.isAuthenticated();
       if (authenticated !== this.state.authenticated) {
         this.setState({ authenticated });
@@ -24,10 +24,10 @@ export default withAuth(
 
     componentDidUpdate() {
       this.checkAuthentication();
-    }
+    } */
 
     onSuccess(res) {
-      if (res.status === "SUCCESS") {
+      /* if (res.status === "SUCCESS") {
         console.log("SUCCESS");
         console.log(res);
         return this.props.auth.redirect({
@@ -37,7 +37,7 @@ export default withAuth(
         // The user can be in another authentication state that requires further action.
         // For more information about these states, see:
         //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
-      }
+      } */
     }
 
     onError(err) {
@@ -52,17 +52,20 @@ export default withAuth(
         <Container>
           <MaxWidth>
             <div>
-              <LoginWidget
+              {/* <LoginWidget
                 baseUrl={this.props.baseUrl}
                 //clientId={this.props.clientId}
                 //redirectUri={this.props.redirectUri}
                 onSuccess={this.onSuccess}
                 onError={this.onError}
-              />
+              /> */}
+              <h2>under temporary construction</h2>
             </div>
           </MaxWidth>
         </Container>
       );
     }
   }
-);
+//);
+
+export default LoginPage;

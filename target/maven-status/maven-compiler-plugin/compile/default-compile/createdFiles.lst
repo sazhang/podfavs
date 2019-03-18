@@ -1,14 +1,14 @@
 org\szhang\personal\podscraper\services\UserService.class
+org\szhang\personal\podscraper\domain\Category.class
+org\szhang\personal\podscraper\repositories\UserRepository.class
+org\szhang\personal\podscraper\domain\Host.class
 org\szhang\personal\podscraper\domain\Keyword.class
 org\szhang\personal\podscraper\db\DatabaseLoader.class
 org\szhang\personal\podscraper\MyConfiguration.class
-org\szhang\personal\podscraper\domain\Category.class
 org\szhang\personal\podscraper\repositories\PodcastRepository.class
 org\szhang\personal\podscraper\controller\PodcastController.class
 org\szhang\personal\podscraper\services\PodcastService.class
 org\szhang\personal\podscraper\domain\User.class
-org\szhang\personal\podscraper\repositories\UserRepository.class
 org\szhang\personal\podscraper\domain\Podcast.class
-org\szhang\personal\podscraper\domain\Host.class
 org\szhang\personal\podscraper\Application.class
 org\szhang\personal\podscraper\domain\Entity.class
