@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Security, SecureRoute, ImplicitCallback } from "@okta/okta-react";
+import { Route } from "react-router-dom";
+import { ImplicitCallback } from '@okta/okta-react';
 import { Global, css } from "@emotion/core";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
@@ -59,14 +59,13 @@ class App extends Component {
         <main className="flex flex-col flex-no-shrink min-h-screen justify-center">
           <Content>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={LoginPage} />
-            {/* <Route
+            <Route
               path="/login"
               render={() => <LoginPage baseUrl="https://dev-992080.okta.com" />}
-            /> */}
-            {/* <Route path="/implicit/callback" component={ImplicitCallback} /> */}
+            />
+            <Route path="/implicit/callback" component={ImplicitCallback} />
             <Route path="/search/:userQuery" component={SearchResults} />
-            {/* <SecureRoute path="/dashboard" component={Dashboard} /> */}
+            <Route path="/dashboard" component={Dashboard} />
           </Content>
           <Footer />
         </main>

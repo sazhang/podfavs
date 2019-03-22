@@ -7,10 +7,12 @@ import config from "./app.config";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Security } from "@okta/okta-react";
 
-/* function onAuthRequired({ history }) {
+function onAuthRequired({ history }) {
   history.push("/login");
 }
-<Router>
+
+ReactDOM.render(
+  <Router>
     <Security
       issuer={config.issuer}
       client_id={config.client_id}
@@ -19,11 +21,6 @@ import { Security } from "@okta/okta-react";
     >
       <App />
     </Security>
-  </Router>, */
-
-ReactDOM.render(
-  <Router>
-    <App />
   </Router>,
   document.getElementById("root")
 );

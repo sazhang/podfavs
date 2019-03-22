@@ -30,8 +30,8 @@ const BtnDiv = styled.div`
   ${tw`block md:flex justify-end md:items-center w-full md:w-auto`};
 `;
 
-//export default withAuth(
-  export default  withRouter(
+export default withAuth(
+  withRouter(
     class SearchBar extends Component {
       constructor(props) {
         super(props);
@@ -41,17 +41,16 @@ const BtnDiv = styled.div`
           userQuery: "",
           toRecs: false
         };
-        /* this.checkAuthentication = this.checkAuthentication.bind(this);
+        this.checkAuthentication = this.checkAuthentication.bind(this);
         this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this); */
+        this.logout = this.logout.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.toHome = this.toHome.bind(this);
         this.toDashboard = this.toDashboard.bind(this);
-        this.login = this.login.bind(this);
       }
 
-      /* async checkAuthentication() {
+      async checkAuthentication() {
         const authenticated = await this.props.auth.isAuthenticated();
         if (authenticated !== this.state.authenticated) {
           this.setState({ authenticated });
@@ -72,10 +71,6 @@ const BtnDiv = styled.div`
 
       async logout() {
         this.props.auth.logout("/");
-      } */
-
-      login() {
-        this.props.history.push("/login");
       }
 
       handleChange(event) {
@@ -162,4 +157,4 @@ const BtnDiv = styled.div`
       }
     }
   )
-//);
+);

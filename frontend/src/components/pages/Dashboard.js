@@ -5,17 +5,17 @@ import { withAuth } from "@okta/okta-react";
 import { Redirect } from "react-router-dom";
 
 // Dashboard that lets users see
-//export default withAuth(
-class Dashboard extends Component {
+export default withAuth(
+  class Dashboard extends Component {
     constructor(props) {
       super(props);
       this.state = { user: null }; //authenticated: null
-      //this.checkAuthentication = this.checkAuthentication.bind(this);
-      //this.checkAuthentication();
-      //this.getCurrentUser = this.getCurrentUser.bind(this);
+      this.checkAuthentication = this.checkAuthentication.bind(this);
+      this.checkAuthentication();
+      this.getCurrentUser = this.getCurrentUser.bind(this);
     }
 
-    /* async getCurrentUser() {
+    async getCurrentUser() {
       this.props.auth.getUser().then(user => this.setState({ user }));
     }
 
@@ -32,26 +32,24 @@ class Dashboard extends Component {
 
     componentDidUpdate() {
       this.checkAuthentication();
-    } */
+    }
 
     render() {
-      //if (this.state.authenticated === null) return null;
+      if (this.state.authenticated === null) return null;
       if (!this.state.user) return null;
 
-      return (
+      console.log(this.state)
+
+      return this.state.authenticated ? (
         <Container>
           <MaxWidth>
             <h2>My saved podcasts</h2>
-            <h2>{this.state.user.sub}</h2>
+            <MyPodcasts />
           </MaxWidth>
         </Container>
-      );
-      //this.state.authenticated ? (
-      /* ) : ( <MyPodcasts />
+      ) : (
         <Redirect to={{ pathname: "/" }} />
-      ); */
+      );
     }
   }
-//);
-
-export default Dashboard;
+);

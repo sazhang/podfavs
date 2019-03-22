@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { withAuth } from "@okta/okta-react";
-import { Container, MaxWidth } from "../styles/globalstyles";
+import { Container, MaxWidth } from "../styles/globalstyles"
 import LoginWidget from "./LoginWidget";
 
 // If user has logged in, redirect to user dashboard, else display login form
-//export default withAuth(
+export default withAuth(
   class LoginPage extends Component {
     constructor(props) {
       super(props);
-      this.state = { authenticated: false }; //previously null
-      //this.checkAuthentication();
+      this.state = {
+        authenticated: null
+      };
+      this.checkAuthentication();
       this.onSuccess = this.onSuccess.bind(this);
       this.onError = this.onError.bind(this);
     }
 
-    /* async checkAuthentication() {
+    async checkAuthentication() {
       const authenticated = await this.props.auth.isAuthenticated();
       if (authenticated !== this.state.authenticated) {
         this.setState({ authenticated });
@@ -24,10 +26,10 @@ import LoginWidget from "./LoginWidget";
 
     componentDidUpdate() {
       this.checkAuthentication();
-    } */
+    }
 
     onSuccess(res) {
-      /* if (res.status === "SUCCESS") {
+      if (res.status === "SUCCESS") {
         console.log("SUCCESS");
         console.log(res);
         return this.props.auth.redirect({
@@ -37,7 +39,7 @@ import LoginWidget from "./LoginWidget";
         // The user can be in another authentication state that requires further action.
         // For more information about these states, see:
         //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
-      } */
+      }
     }
 
     onError(err) {
@@ -51,21 +53,16 @@ import LoginWidget from "./LoginWidget";
       ) : (
         <Container>
           <MaxWidth>
-            <div>
-              {/* <LoginWidget
-                baseUrl={this.props.baseUrl}
-                //clientId={this.props.clientId}
-                //redirectUri={this.props.redirectUri}
-                onSuccess={this.onSuccess}
-                onError={this.onError}
-              /> */}
-              <h2>under temporary construction</h2>
-            </div>
+            <LoginWidget
+              baseUrl="https://dev-992080.okta.com"
+              client_id={this.props.client_id}
+              redirect_uri={this.props.redirect_uri}
+              onSuccess={this.onSuccess}
+              onError={this.onError}
+            />
           </MaxWidth>
         </Container>
       );
     }
   }
-//);
-
-export default LoginPage;
+);
