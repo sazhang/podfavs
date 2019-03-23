@@ -44,7 +44,7 @@ export default withAuth(
         <Container>
           <MaxWidth>
             <h2>My saved podcasts</h2>
-            <MyPodcasts />
+            <MyPodcasts email={this.state.user.email}/>
           </MaxWidth>
         </Container>
       ) : (

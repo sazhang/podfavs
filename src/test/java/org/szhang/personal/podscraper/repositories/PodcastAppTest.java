@@ -1,5 +1,6 @@
 package org.szhang.personal.podscraper.repositories;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,7 @@ import org.szhang.personal.podscraper.domain.User;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Test methods PodcastController class.
@@ -31,11 +31,18 @@ public class PodcastAppTest {
   @Autowired
   private UserRepository userRepository;
 
+  private String michael;
+  
+  @Before
+  public void initialize() {
+    michael = "michael@dundermifflin.co";
+  }
+
   @Test
   public void testGetPodcastById() {
-    Podcast result = podcastRepository.getPodcastByID(18932L);
+    Podcast result = podcastRepository.getPodcastByID(18852L);
     List<Keyword> keywords = result.getKeywords();
-    assertEquals(15, keywords.size());
+    assertEquals(5, keywords.size());
     List<Category> categories = result.getCategories();
     assertEquals(1, categories.size());
   }
@@ -57,14 +64,6 @@ public class PodcastAppTest {
   }
 
   @Test
-  public void testGetMySavedPodcasts() {
-    Collection<Podcast> savedPodcasts = userRepository.getMySavedPodcasts(19054L);
-    assertEquals(2, savedPodcasts.size());
-    savedPodcasts = userRepository.getMySavedPodcasts(123L);
-    assertEquals(0, savedPodcasts.size());
-  }
-
-  @Test
   public void testGetFeaturedPodcasts() {
     Collection<Podcast> savedPodcasts = podcastRepository.getFeaturedPodcasts();
     assertEquals(6, savedPodcasts.size());
@@ -74,42 +73,37 @@ public class PodcastAppTest {
   }
 
   @Test
+  public void testCreateUser() {
+    assertNull(userRepository.findByEmail(michael));
+    userRepository.save(new User(michael));
+    assertNotNull(userRepository.findByEmail(michael));
+  }
+
+  @Test
   public void testSaveThenUnsavePodcast() {
-    long michaelId = 19054L;
     long podcastId = 18837L;
     // save a podcast
-    assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
-    userRepository.saveAPodcast(podcastId, michaelId);
-    assertEquals(3, userRepository.getMySavedPodcasts(michaelId).size());
+    assertEquals(0, userRepository.getMySavedPodcasts(michael).size());
+    userRepository.saveAPodcast(podcastId, michael);
+    assertEquals(1, userRepository.getMySavedPodcasts(michael).size());
+
     // thanks to neo4j's MERGE call, there is only one relationship between michael and the podcast
-    userRepository.saveAPodcast(podcastId, michaelId);
-    assertEquals(3, userRepository.getMySavedPodcasts(michaelId).size());
+    userRepository.saveAPodcast(podcastId, michael);
+    assertEquals(1, userRepository.getMySavedPodcasts(michael).size());
     // unsave a podcast
-    userRepository.unsaveAPodcast(podcastId, michaelId);
-    assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
+    userRepository.unsaveAPodcast(podcastId, michael);
+    assertEquals(0, userRepository.getMySavedPodcasts(michael).size());
   }
 
   @Test
   public void testSaveThenUnsaveManyPodcasts() {
-    long michaelId = 19054L;
     List<Long> podcastIds = new ArrayList<>(Arrays.asList(18837L, 18861L));
     // save podcasts
-    assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
-    userRepository.saveAllPodcasts(podcastIds, michaelId);
-    assertEquals(4, userRepository.getMySavedPodcasts(michaelId).size());
+    assertEquals(0, userRepository.getMySavedPodcasts(michael).size());
+    userRepository.saveAllPodcasts(podcastIds, michael);
+    assertEquals(2, userRepository.getMySavedPodcasts(michael).size());
     // unsave podcasts
-    userRepository.unsaveAllPodcasts(podcastIds, michaelId);
-    assertEquals(2, userRepository.getMySavedPodcasts(michaelId).size());
-  }
-
-  @Test
-  public void testGetUser() {
-    String michaelId = "michaelscott";
-    User existingUser = userRepository.findByUserId(michaelId);
-    assertTrue(existingUser != null);
-
-    String unknownId = "stranger";
-    User userDoesNotExist = userRepository.findByUserId(unknownId);
-    assertTrue(userDoesNotExist == null);
+    userRepository.unsaveAllPodcasts(podcastIds, michael);
+    assertEquals(0, userRepository.getMySavedPodcasts(michael).size());
   }
 }

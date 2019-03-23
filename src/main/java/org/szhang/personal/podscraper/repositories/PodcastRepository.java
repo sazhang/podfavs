@@ -25,8 +25,8 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
   @Query("MATCH (p:Podcast) " +
       "WHERE rand() < 0.10 " +
       "WITH p LIMIT 6 " +
-      "OPTIONAL MATCH pod=(p:Podcast)-[*]->() " +
-      "RETURN pod, nodes(pod), rels(pod)")
+      "OPTIONAL MATCH (p:Podcast)-[r]-(b) " +
+      "RETURN r, p, b")
   Collection<Podcast> getFeaturedPodcasts();
 
   /**
@@ -49,7 +49,7 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
    * @param ids   list of podcast ids
    * @return podcasts
    */
-  @Query("UNWIND {ids} AS id MATCH pod=(p:Podcast)-[*]->() WHERE ID(p) = id RETURN pod, nodes(pod), rels(pod)")
+  @Query("UNWIND {ids} AS id MATCH (p:Podcast)-[r]-(b) WHERE ID(p) = id RETURN r, p, b")
   Collection<Podcast> getPodcastsByIds(@Param("ids") List<Long> ids);
 
   /**
@@ -58,6 +58,6 @@ public interface PodcastRepository extends Neo4jRepository<Podcast, Long> {
    * @param id  podcast id
    * @return podcast
    */
-  @Query("MATCH pod=(p:Podcast)-[*]->() WHERE ID(p) = {id} RETURN pod, nodes(pod), rels(pod)")
+  @Query("MATCH (p:Podcast)-[r]-(b) WHERE ID(p) = {id} RETURN r, p, b")
   Podcast getPodcastByID(@Param("id") Long id);
 }

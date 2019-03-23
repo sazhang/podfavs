@@ -25,41 +25,36 @@ public class UserService {
 
   @Transactional
   public User createUser(String email) {
-    return userRepository.createUser(email);
-  }
-
-  @Transactional
-  public User findByUserId(String userId) {
-    return userRepository.findByUserId(userId);
+    return userRepository.save(new User(email));
   }
 
   @Transactional
   public User findByUserEmail(String email) {
-    return userRepository.findByUserEmail(email);
+    return userRepository.findByEmail(email);
   }
 
   @Transactional
-  public Collection<Podcast> getMySavedPodcasts(Long id) {
-    return userRepository.getMySavedPodcasts(id);
+  public Collection<Podcast> getMySavedPodcasts(String email) {
+    return userRepository.getMySavedPodcasts(email);
   }
 
   @Transactional
-  public void saveAPodcast(Long podId, Long id) {
-    userRepository.saveAPodcast(podId, id);
+  public void saveAPodcast(Long podId, String email) {
+    userRepository.saveAPodcast(podId, email);
   }
 
   @Transactional
-  public void unsaveAPodcast(Long podId, Long id) {
-    userRepository.unsaveAPodcast(podId, id);
+  public void unsaveAPodcast(Long podId, String email) {
+    userRepository.unsaveAPodcast(podId, email);
   }
 
   @Transactional
-  public void saveAllPodcasts(List<Long> podIds, Long id) {
-    userRepository.saveAllPodcasts(podIds, id);
+  public void saveAllPodcasts(List<Long> podIds, String email) {
+    userRepository.saveAllPodcasts(podIds, email);
   }
 
   @Transactional
-  public void unsaveAllPodcasts(List<Long> podIds, Long id) {
-    userRepository.unsaveAllPodcasts(podIds, id);
+  public void unsaveAllPodcasts(List<Long> podIds, String email) {
+    userRepository.unsaveAllPodcasts(podIds, email);
   }
 }

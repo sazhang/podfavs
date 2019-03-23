@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import tw from "tailwind.macro";
@@ -43,7 +44,6 @@ class PodcastCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticated: false,
       userId: "",
       isSaved: false
     };
@@ -61,10 +61,15 @@ class PodcastCard extends Component {
   }
 
   handleClickSave() {
-    if (this.state.userId.length > 0) {
-      this.setState({ isSaved: !this.state.isSaved });
-    } else {
+    if (this.props.email == null) {
       console.log("Not auth!");
+      this.props.history.push("/login");
+    } else {
+      this.setState({ isSaved: !this.state.isSaved });
+      const aPodcast = this.props.podcast;
+      console.log(aPodcast.users.filter(function(user) {
+        console.log(user == this.props.email)
+      })) 
     }
   }
 
@@ -74,6 +79,7 @@ class PodcastCard extends Component {
     const descrip = aPodcast.description;
     const link = aPodcast.url;
     const fill = this.state.isSaved ? "#6574cd" : "none";
+    console.log(this.props.email)
 
     return (
       <CardWrapper>
@@ -108,4 +114,4 @@ PodcastCard.propTypes = {
   podcast: PropTypes.object.isRequired
 };
 
-export default PodcastCard;
+export default withRouter(PodcastCard);

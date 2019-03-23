@@ -11,7 +11,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-//@EnableResourceServer
 @SpringBootApplication
 @EntityScan("org.szhang.personal.podscraper.domain")
 public class Application {
@@ -20,7 +19,7 @@ public class Application {
     SpringApplication.run(Application.class, args);
   }
 
-/*  @Bean
+ @Bean
   public FilterRegistrationBean<CorsFilter> corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
@@ -32,5 +31,5 @@ public class Application {
     FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
     bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
     return bean;
-  }*/
+  }
 }

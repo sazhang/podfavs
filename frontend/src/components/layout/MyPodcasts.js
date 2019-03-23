@@ -34,7 +34,7 @@ export default withAuth(
       const { podcasts } = this.state;
       if (!podcasts) return <div><h2>loading...</h2></div>
       podcasts.map(podcast =>
-        cards.push(<PodcastCard key={podcast.id} podcast={podcast} />)
+        cards.push(<PodcastCard key={podcast.id} podcast={podcast} email={this.props.email}/>)
       );
       return <CardDeck>{cards}</CardDeck>;
     }

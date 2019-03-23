@@ -18,87 +18,66 @@ import java.util.List;
 public interface UserRepository extends Neo4jRepository<User, Long> {
 
   /**
-   * Create user.
-   *
-   * @param email     user's email address
-   * @return user
-   */
-  //@param userId    user id given by Okta @PathVariable(value = "userId") String userId,
-  @Query("MERGE (u:User { email: {email} }) " +
-      "ON CREATE SET u.email = {email} " +
-      "RETURN u")
-  User createUser(@PathVariable(value = "email") String email);
-
-  /**
-   * Retrieve user.
-   *
-   * @param userId    user id
-   * @return user
-   */
-  @Query("MATCH usr=(u:User)-[:SAVED]->(p:Podcast) WHERE u.userId = {userId} RETURN u")
-  User findByUserId(@PathVariable(value = "userId") String userId);
-
-  /**
    * Retrieve user.
    *
    * @param email    user email
    * @return user
    */
-  @Query("MATCH usr=(u:User)-[:SAVED]->(p:Podcast) WHERE u.email = {email} RETURN u")
-  User findByUserEmail(@PathVariable(value = "email") String email);
+  @Query("MATCH (u:User {email: {email} }) RETURN u")
+  User findByEmail(@PathVariable(value = "email") String email);
 
   /**
    * Get the user's list of saved podcasts.
    *
-   * @param id    user id
+   * @param email    user email
    * @return podcasts
    */
-  @Query("MATCH usr=(u:User)-[:SAVED]->(p:Podcast) WHERE ID(u) = {id} RETURN p")
-  Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "id") Long id);
+  @Query("MATCH pod=(p:Podcast)<-[:SAVED]-(u:User) WHERE u.email = {email} RETURN pod, nodes(pod), rels(pod)")
+  Collection<Podcast> getMySavedPodcasts(@PathVariable(value = "email") String email);
 
   /**
    * User saves a podcast.
    *
    * @param podId   podcast id
-   * @param id  user id
+   * @param email    user email
    */
   @Query("MATCH (u:User),(p:Podcast) " +
-      "WHERE ID(u) = {id} AND ID(p) = {podId} " +
+      "WHERE u.email = {email} AND ID(p) = {podId} " +
       "MERGE (u)-[r:SAVED]->(p)")
-  void saveAPodcast(@Param("podId") Long podId, @Param("id") Long id);
+  void saveAPodcast(@Param("podId") Long podId, @PathVariable(value = "email") String email);
 
   /**
    * User unsaves a podcast.
    *
    * @param podId   podcast id
-   * @param id  user id
+   * @param email    user email
    */
   @Query("MATCH (u:User)-[r:SAVED]->(p:Podcast) " +
-      "WHERE ID(u) = {id} AND ID(p) = {podId} " +
+      "WHERE u.email = {email} AND ID(p) = {podId} " +
       "DELETE r")
-  void unsaveAPodcast(@Param("podId") Long podId, @Param("id") Long id);
+  void unsaveAPodcast(@Param("podId") Long podId, @PathVariable(value = "email") String email);
 
   /**
    * User saves all podcasts in current list.
    *
    * @param podIds   list of podcast ids
-   * @param id  user id
+   * @param email    user email
    */
   @Query("UNWIND {podIds} AS podId " +
       "MATCH (u:User),(p:Podcast) " +
-      "WHERE ID(u) = {id} AND ID(p) = podId " +
+      "WHERE u.email = {email} AND ID(p) = podId " +
       "MERGE (u)-[r:SAVED]->(p)")
-  void saveAllPodcasts(@Param("podIds") List<Long> podIds, @Param("id") Long id);
+  void saveAllPodcasts(@Param("podIds") List<Long> podIds, @PathVariable(value = "email") String email);
 
   /**
    * User unsaves all podcasts in current list.
    *
    * @param podIds   list of podcast ids
-   * @param id  user id
+   * @param email    user email
    */
   @Query("UNWIND {podIds} AS podId " +
       "MATCH (u:User)-[r:SAVED]->(p:Podcast) " +
-      "WHERE ID(u) = {id} AND ID(p) = podId " +
+      "WHERE u.email = {email} AND ID(p) = podId " +
       "DELETE r")
-  void unsaveAllPodcasts(@Param("podIds") List<Long> podIds, @Param("id") Long id);
+  void unsaveAllPodcasts(@Param("podIds") List<Long> podIds, @PathVariable(value = "email") String email);
 }

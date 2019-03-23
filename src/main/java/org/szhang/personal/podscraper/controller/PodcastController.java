@@ -50,35 +50,40 @@ public class PodcastController {
 
   @GetMapping("/api/mypodcasts")
   public Collection<Podcast> getMySavedPodcasts(Principal principal) {
-    System.out.println(principal.getName());
-    log.debug(principal.getName());
-    //Map<String, Object> details = authentication.getTokenAttributes();
-    //String email = details.get("sub").toString();
-    //User user = getUserFromDb(email);
-    //System.out.println(user.getId());
-    //System.out.println(userService.getMySavedPodcasts(user.getId()));
-    //return userService.getMySavedPodcasts(user.getId());
-    return new ArrayList<>();
+    String email = principal.getName();
+    System.out.println(email);
+    log.debug(email);
+    User user = getUserFromDb(email);
+    Collection<Podcast> queryResult = userService.getMySavedPodcasts(email);
+    List<Podcast> podcastNodes = new ArrayList<>();
+    for (Podcast podcast : queryResult) {
+      podcastNodes.add(podcastService.getPodcastByID(podcast.getId()));
+    }
+    return podcastNodes;
   }
 
   @PostMapping("/api/save/{podId}")
-  public void saveAPodcast(@PathVariable(value = "podId") Long podId, @PathVariable(value = "id") Long id) {
-    userService.saveAPodcast(podId, id);
+  public void saveAPodcast(@PathVariable(value = "podId") Long podId, Principal principal) {
+    String email = principal.getName();
+    userService.saveAPodcast(podId, email);
   }
 
   @DeleteMapping("/api/unsave/{podId}")
-  public void unsaveAPodcast(@PathVariable(value = "podId") Long podId, @PathVariable(value = "id") Long id) {
-    userService.unsaveAPodcast(podId, id);
+  public void unsaveAPodcast(@PathVariable(value = "podId") Long podId, Principal principal) {
+    String email = principal.getName();
+    userService.unsaveAPodcast(podId, email);
   }
 
   @PostMapping("/api/savelist/{podIds}")
-  public void saveAllPodcasts(@PathVariable(value = "podIds") List<Long> podIds, @PathVariable(value = "id") Long id) {
-    userService.saveAllPodcasts(podIds, id);
+  public void saveAllPodcasts(@PathVariable(value = "podIds") List<Long> podIds, Principal principal) {
+    String email = principal.getName();
+    userService.saveAllPodcasts(podIds, email);
   }
 
   @DeleteMapping("/api/unsavelist/{podIds}")
-  public void unsaveAllPodcasts(@PathVariable(value = "podIds") List<Long> podIds, @PathVariable(value = "id") Long id) {
-    userService.unsaveAllPodcasts(podIds, id);
+  public void unsaveAllPodcasts(@PathVariable(value = "podIds") List<Long> podIds, Principal principal) {
+    String email = principal.getName();
+    userService.unsaveAllPodcasts(podIds, email);
   }
 
   /**
