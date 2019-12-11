@@ -1,5 +1,8 @@
 # Podcast Recommender
 Get podcast recommendations by title and/or keywords (e.g., tech, politics).
+Note: The EC2 instance was terminated after having surpassed the free tier.
+
+![image](https://s3.amazonaws.com/poly-screenshots.angel.co/Project/a8/927515/284af6addc947eac4aaa2cae1e8d27e3-original.png)
 
 ### Tech stack:
 * Application code: Java, Selenium (for web scraping)
